@@ -7,17 +7,17 @@ export function setLoadingState(isLoading) {
     }
 }
 
-export function getAllBeers() {
+export function getAllBeersRequest() {
    return {
        type: BEER_ACTION_TYPE.GET_ALL_BEERS_REQUEST,
        payload: {}
    }
 }
 
-export function getCertainBeer() {
+export function getCertainBeerRequest(beerId) {
    return {
        type: BEER_ACTION_TYPE.GET_CERTAIN_BEER,
-       payload: {}
+       payload: { beerId }
    }
 }
 
@@ -28,17 +28,17 @@ export function getAllBeersSucceed(data) {
     }
 }
 
-export function setBeerPerPage(perPageNumber) {
+export function setBeerPerPage(pageNumber, perPageNumber) {
     return {
         type: BEER_ACTION_TYPE.SET_BEERS_PER_PAGE,
-        payload: perPageNumber
+        payload: { pageNumber, perPageNumber }
     }
 }
 
-export function getBeersByPage(pageNumber) {
+export function getBeersByPage(pageNumber, perPageNumber) {
     return {
         type: BEER_ACTION_TYPE.GET_BEERS_BY_PAGE,
-        payload: pageNumber
+        payload: { pageNumber, perPageNumber }
     }
 }
 
