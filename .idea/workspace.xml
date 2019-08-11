@@ -1,7 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5136323a-303c-4a07-8f88-225123be7e79" name="Default Changelist" comment="" />
+    <list default="true" id="5136323a-303c-4a07-8f88-225123be7e79" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/components/Beer/Beer.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Beer/Beer.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/container/Pagination/Page.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Spinner/Spinner.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Spinner/Spinner.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/container/Beers/Beer.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/container/Beers/Beer.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Spinner/spinner.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/container/Header/header.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/container/Header/header.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/container/Home/Home.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/container/Home/Home.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/container/Home/Home.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/container/Home/Home.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/container/Pagination/Pagination.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/container/Pagination/Pagination.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/container/Pagination/PerPage.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/reduxSagas/beerSaga.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/reduxSagas/beerSaga.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/actions/actionTypes.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/actions/actionTypes.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/actions/beerActionCreators.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/actions/beerActionCreators.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/reducers/beerReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/reducers/beerReducer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/selectors/beerSelector.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/selectors/beerSelector.js" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,8 +45,11 @@
     <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="SCSS" />
     <property name="last_opened_file_path" value="C:/Program Files/Git/bin/git.exe" />
     <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.standard" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.standard" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.standard" value="" />
     <property name="nodejs_interpreter_path" value="node" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -80,7 +101,8 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1565124963265</updated>
-      <workItem from="1565124968147" duration="39191000" />
+      <workItem from="1565124968147" duration="56777000" />
+      <workItem from="1565507382343" duration="18451000" />
     </task>
     <servers />
   </component>
@@ -92,7 +114,9 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>

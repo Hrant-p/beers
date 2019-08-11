@@ -28,19 +28,13 @@ export function getAllBeersSucceed(data) {
     }
 }
 
-export function setBeerPerPage(pageNumber, perPageNumber) {
+export function getPaginationRequest(pageNumber, perPageNumber) {
     return {
-        type: BEER_ACTION_TYPE.SET_BEERS_PER_PAGE,
-        payload: { pageNumber, perPageNumber }
+        type: BEER_ACTION_TYPE.PAGINATION_REQUEST,
+        payload: {pageNumber, perPageNumber}
     }
 }
 
-export function getBeersByPage(pageNumber, perPageNumber) {
-    return {
-        type: BEER_ACTION_TYPE.GET_BEERS_BY_PAGE,
-        payload: { pageNumber, perPageNumber }
-    }
-}
 
 export function requestError(errorMessage) {
     return {

@@ -2,34 +2,56 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from "redux";
-import { getAllBeersRequest } from "../../store/actions/beerActionCreators";
-import {beersSelector, isLoadingSelector} from "../../store/selectors/beerSelector";
-import Beer from "../Beers/Beer";
-import PerPage from "../Pagination/PerPage";
+import {
+    getAllBeersRequest,
+    getPaginationRequest,
+} from "../../store/actions/beerActionCreators";
+import {
+    beersSelector,
+    isLoadingSelector,
+    pageSelector,
+    perPageSelector
+} from "../../store/selectors/beerSelector";
+import Beer from "../../components/Beer/Beer";
+import Pagination from "../Pagination/Pagination";
+import Page from "../Pagination/Page";
+import Spinner from "../../components/Spinner/Spinner";
+
+import './Home.scss';
 
 class Home extends Component {
 
     componentDidMount() {
-        this.props.getAllBeersActionCreator()
+        if (this.props.perPage === 25) {
+            this.props.getAllBeersActionCreator();
+            console.log('mount')
+        }
     };
 
     drawBeers = () => {
        const beers = this.props.beers.toJS();
-        return beers.map(beer =>
-            <Beer
+        return beers.map(
+            beer => <Beer
                 beer={beer}
                 key={beer.id}
+                loading={this.props.isLoading}
             />
-        )
+            )};
+
+    handlePagination = (page, perPage) => {
+        this.props.paginationActionCreator(page, perPage)
+        console.log('handlePagination')
     };
 
     render() {
 
-
         return (
-            <div className='beerContainer'>
-                <PerPage />
-                {this.drawBeers()}
+            <div>
+                <Pagination pagination={this.handlePagination}/>
+                <div className='beerContainer'>
+                    {this.drawBeers()}
+                </div>
+                <Page pagination={this.handlePagination}/>
             </div>
         );
     }
@@ -37,12 +59,17 @@ class Home extends Component {
 
 const mapStateToProps = state => ({
     isLoading: isLoadingSelector(state),
-    beers: beersSelector(state)
+    beers: beersSelector(state),
+    page: pageSelector(state),
+    perPage: perPageSelector(state)
 });
 
 const mapDispatchToProps = dispatch =>
     bindActionCreators(
-        {getAllBeersActionCreator: getAllBeersRequest},
+        {
+            getAllBeersActionCreator: getAllBeersRequest,
+            paginationActionCreator: getPaginationRequest
+        },
     dispatch
     );
 
