@@ -5,6 +5,8 @@ const initialState = fromJS({
     page: 1,
     perPage: 25,
     beers: [],
+    details: [],
+    random: [],
     isLoading: false,
     error: null
 });
@@ -14,12 +16,17 @@ export default function (state = initialState, { type, payload }) {
         case BEER_ACTION_TYPE.GET_ALL_BEERS_SUCCEED:
             return state.set('beers', fromJS(payload.data));
         case BEER_ACTION_TYPE.PAGINATION_REQUEST:
-            return state.set('page', fromJS(payload.pageNumber))
+            return state
+                .set('page', fromJS(payload.pageNumber))
                 .set('perPage', fromJS(payload.perPageNumber));
+        case BEER_ACTION_TYPE.GET_CERTAIN_BEER_SUCCEED:
+            return state.set('details', fromJS(payload.data));
+        case BEER_ACTION_TYPE.GET_RANDOM_BEER_SUCCEED:
+            return state.set('random', fromJS(payload.data));
         case BEER_ACTION_TYPE.REQUEST_ERROR_STATE:
             return state.set('error', fromJS(payload.errorMessage));
         case LOADING_ACTION_TYPE.SET_LOADING_STATE:
-                return state.set('isLoading', fromJS(payload.isLoading))
+                return state.set('isLoading', fromJS(payload.isLoading));
         default:
             return state;
     }

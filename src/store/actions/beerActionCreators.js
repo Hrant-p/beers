@@ -14,10 +14,38 @@ export function getAllBeersRequest() {
    }
 }
 
-export function getCertainBeerRequest(beerId) {
+export function getCertainBeerRequest(id) {
+    return {
+        type: BEER_ACTION_TYPE.GET_CERTAIN_BEER,
+        payload: { id }
+    }
+}
+
+export function clearBeerDetails() {
+    return {
+        type: BEER_ACTION_TYPE.CLEAR_CERTAIN_BEER,
+        payload: {}
+    }
+}
+
+export function getRandomBeerRequest() {
+    return {
+        type: BEER_ACTION_TYPE.GET_RANDOM_BEER,
+        payload: {}
+    }
+}
+
+export function getRandomBeerRequestSuccess(data) {
+    return {
+        type: BEER_ACTION_TYPE.GET_RANDOM_BEER_SUCCEED,
+        payload: { data }
+    }
+}
+
+export function getCertainBeerRequestSuccess(data) {
    return {
-       type: BEER_ACTION_TYPE.GET_CERTAIN_BEER,
-       payload: { beerId }
+       type: BEER_ACTION_TYPE.GET_CERTAIN_BEER_SUCCEED,
+       payload: { data }
    }
 }
 

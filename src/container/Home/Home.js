@@ -3,14 +3,18 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from "redux";
 import {
+    clearBeerDetails,
     getAllBeersRequest,
+    getCertainBeerRequest,
     getPaginationRequest,
+    getRandomBeerRequest,
 } from "../../store/actions/beerActionCreators";
 import {
     beersSelector,
+    detailsSelector,
     isLoadingSelector,
     pageSelector,
-    perPageSelector
+    perPageSelector, randomSelector
 } from "../../store/selectors/beerSelector";
 import Beer from "../../components/Beer/Beer";
 import Pagination from "../Pagination/Pagination";
@@ -18,6 +22,7 @@ import Page from "../Pagination/Page";
 import Spinner from "../../components/Spinner/Spinner";
 
 import './Home.scss';
+import Detail from "../../components/Detail/Detail";
 
 class Home extends Component {
 
@@ -28,6 +33,11 @@ class Home extends Component {
         }
     };
 
+    handleDetail = id => {
+        this.props.beerDetailActionCreator(id);
+        this.props.getRandomBeerActionCreator();
+    };
+
     drawBeers = () => {
        const beers = this.props.beers.toJS();
         return beers.map(
@@ -35,25 +45,36 @@ class Home extends Component {
                 beer={beer}
                 key={beer.id}
                 loading={this.props.isLoading}
+                handleDetail={this.handleDetail}
             />
             )};
 
     handlePagination = (page, perPage) => {
         this.props.paginationActionCreator(page, perPage)
-        console.log('handlePagination')
+    };
+    onClose = () => {
+        this.props.clearDetailActionCreator()
     };
 
     render() {
+        const { details, random, isLoading } = this.props;
 
         return (
-            <div>
-                <Pagination pagination={this.handlePagination}/>
+            <>
+                <Pagination pagination={this.handlePagination} />
                 <div className='beerContainer'>
                     {this.drawBeers()}
+                    {isLoading && <Spinner/>}
+                    {details.size && <Detail
+                        details={details}
+                        onClose={this.onClose}
+                        randomBeers={random}
+                        handleDetail={this.handleDetail}
+                    />}
                 </div>
                 <Page pagination={this.handlePagination}/>
-            </div>
-        );
+            </>
+        )
     }
 }
 
@@ -61,14 +82,19 @@ const mapStateToProps = state => ({
     isLoading: isLoadingSelector(state),
     beers: beersSelector(state),
     page: pageSelector(state),
-    perPage: perPageSelector(state)
+    perPage: perPageSelector(state),
+    details: detailsSelector(state),
+    random: randomSelector(state)
 });
 
 const mapDispatchToProps = dispatch =>
     bindActionCreators(
         {
             getAllBeersActionCreator: getAllBeersRequest,
-            paginationActionCreator: getPaginationRequest
+            paginationActionCreator: getPaginationRequest,
+            beerDetailActionCreator: getCertainBeerRequest,
+            clearDetailActionCreator: clearBeerDetails,
+            getRandomBeerActionCreator: getRandomBeerRequest
         },
     dispatch
     );
