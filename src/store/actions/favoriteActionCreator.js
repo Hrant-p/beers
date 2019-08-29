@@ -1,22 +1,36 @@
 import { FAVOURITE_ACTION_TYPE } from "./actionTypes";
 
-export function addToFavouriteList(id) {
+export function addToFavouriteList(beersList, favouriteList, id) {
     return {
         type: FAVOURITE_ACTION_TYPE.ADD_TO_FAVOURITES,
-        payload: { id }
+        payload: { beersList, favouriteList, id }
     }
 }
 
-export function removeFromFavoriteList(removeId) {
+export function addedToFavouriteListSucceed(data) {
+    return {
+        type: FAVOURITE_ACTION_TYPE.ADDED_FAVOURITE_LIST_SUCCEED,
+        payload: { data }
+    }
+}
+
+export function clearFavouriteList() {
+    return {
+        type: FAVOURITE_ACTION_TYPE.CLEAR_FAVOURITE_LIST,
+        payload: {}
+    }
+}
+
+export function removeFromFavoriteList(list, removeId) {
     return {
         type: FAVOURITE_ACTION_TYPE.REMOVE_FROM_FAVOURITES,
-        payload: { removeId }
+        payload: { list, removeId }
     }
 }
 
-export function setNewFavouriteList(listOfId) {
+export function removeFromFavoriteListSucceed(list) {
     return {
-        type: FAVOURITE_ACTION_TYPE.SET_NEW_FAVOURITE_LIST,
-        payload: { listOfId }
+        type: FAVOURITE_ACTION_TYPE.REMOVE_FROM_FAVOURITES_SUCCEED,
+        payload: { list }
     }
 }

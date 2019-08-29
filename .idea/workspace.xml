@@ -2,18 +2,28 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5136323a-303c-4a07-8f88-225123be7e79" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/components/Detail/Detail.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Detail/Detail.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src.zip" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/API/helpers.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/API/helpers.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Beer/Beer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Beer/Beer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Navbar/Navbar.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Navbar/Navbar.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Navbar/Navbar.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Navbar/Navbar.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Spinner/spinner.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Spinner/spinner.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/container/Favourite/Favourite.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/container/Favourite/Favourite.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/container/Home/Home.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/container/Home/Home.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/container/Pagination/Page.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/container/Pagination/Page.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/container/Pagination/Pagination.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/container/Pagination/Pagination.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/reduxSagas/beerSaga.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/reduxSagas/beerSaga.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/reduxSagas/favouriteSaga.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/reduxSagas/favouriteSaga.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/store/actions/actionTypes.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/actions/actionTypes.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/store/actions/beerActionCreators.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/actions/beerActionCreators.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/actions/favoriteActionCreator.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/actions/favoriteActionCreator.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/middlewares/middleware.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/middlewares/middleware.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/store/reducers/beerReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/reducers/beerReducer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/reducers/favouriteReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/reducers/favouriteReducer.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/store/selectors/beerSelector.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/selectors/beerSelector.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/selectors/favouriteSelector.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/selectors/favouriteSelector.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -37,6 +47,7 @@
     <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="SCSS" />
@@ -103,7 +114,9 @@
       <workItem from="1565124968147" duration="56777000" />
       <workItem from="1565507382343" duration="18733000" />
       <workItem from="1565630362319" duration="55621000" />
-      <workItem from="1566060107756" duration="3605000" />
+      <workItem from="1566060107756" duration="24966000" />
+      <workItem from="1566496689746" duration="9487000" />
+      <workItem from="1566842767520" duration="38119000" />
     </task>
     <servers />
   </component>
@@ -122,5 +135,8 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
 </project>

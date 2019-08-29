@@ -7,25 +7,37 @@ function Beer(props) {
     const {
         loading,
         handleDetail,
-        beer: {
-            name,
-            id,
-            image_url,
-            tagline
-        }
+        handleFavourite,
+        clearFavourite,
+        removeFromFavourite,
+        beer
     } = props;
 
     return (
-        <div className='beer'>
-            <h5>{name}</h5>
-            <p>{tagline}</p>
-            <img
-                src={image_url}
-                alt={name}
-                style={{width: '100px'}}
-                onClick={() => handleDetail(id)}
-            />
-        </div>
+        <>
+            {loading && <Spinner/>}
+            <div className='beer'>
+                <button onClick={() => handleFavourite(beer.get('id'))}>
+                    Add
+                </button>
+                <button onClick={() => removeFromFavourite(beer.get('id'))}>
+                    remove
+                </button>
+                <button onClick={clearFavourite}>
+                    clear
+                </button>
+
+                <h5>{beer.get('name')}</h5>
+                <p>{beer.get('tagline')}</p>
+                <img
+                    src={beer.get('image_url')}
+                    alt={beer.get('name')}
+                    style={{width: '100px'}}
+                    onClick={() => handleDetail(beer.get('id'))}
+                />
+            </div>
+        </>
+
     );
 }
 

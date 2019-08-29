@@ -6,9 +6,9 @@ const Navbar = () => {
 
         return (
             <nav>
-                <Link to='/'>
+                <a href="/" >
                     Home
-                </Link>
+                </a>
                 <Link to='/favourite'>
                     Favourite
                 </Link>

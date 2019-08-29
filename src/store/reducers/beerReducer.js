@@ -17,8 +17,15 @@ export default function (state = initialState, { type, payload }) {
             return state.set('beers', fromJS(payload.data));
         case BEER_ACTION_TYPE.PAGINATION_REQUEST:
             return state
-                .set('page', fromJS(payload.pageNumber))
-                .set('perPage', fromJS(payload.perPageNumber));
+                .set('perPage', fromJS(payload.perPageNumber))
+                .set('page', fromJS(payload.pageNumber));
+        case BEER_ACTION_TYPE.INFINITE_SCROLL_BEERS:
+            return state
+                .set('perPage', fromJS(payload.perPageNumber))
+                .set('page', fromJS(payload.pageNumber));
+        case BEER_ACTION_TYPE.GET_PAGINATION_BEER_SUCCEED:
+            return state.update('beers', item =>
+                fromJS(item.push(...payload.data)));
         case BEER_ACTION_TYPE.GET_CERTAIN_BEER_SUCCEED:
             return state.set('details', fromJS(payload.data));
         case BEER_ACTION_TYPE.GET_RANDOM_BEER_SUCCEED:

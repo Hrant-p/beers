@@ -1,7 +1,8 @@
-import { put, call, all, takeLatest, takeEvery } from 'redux-saga/effects';
+import { put, call, all, takeLatest } from 'redux-saga/effects';
 import {
     clearBeerDetails,
     getAllBeersSucceed,
+    getBeersPaginationSucceed,
     getCertainBeerRequestSuccess,
     getRandomBeerRequestSuccess,
     requestError,
@@ -52,7 +53,7 @@ function* getRandomBeers() {
         yield put(setLoadingState(true));
 
         const url = yield constructUrl([beerAPI, 'random'], {})
-        const {data} = yield call(request,'GET', url);
+        const { data } = yield call(request,'GET', url);
         const _data = yield call(request,'GET', url);
         const __data = yield call(request,'GET', url);
         const beerArr = yield [
@@ -60,7 +61,6 @@ function* getRandomBeers() {
                 ..._data.data,
                 ...__data.data
         ];
-        console.log(beerArr)
         yield put(getRandomBeerRequestSuccess(beerArr));
         yield put(setLoadingState(false))
 
@@ -74,28 +74,50 @@ function* clearCertainBeer() {
     try {
         yield put(setLoadingState(true));
         yield put(getCertainBeerRequestSuccess([]));
-        yield put (getRandomBeerRequestSuccess([]))
+        yield put(getRandomBeerRequestSuccess([]));
         yield put(setLoadingState(false))
 
     } catch (e) {
-        yield put(setLoadingState(false))
+        yield put(setLoadingState(false));
         alert(e)
     }
 }
 
 
-function* setPagination({ payload: { pageNumber, perPageNumber} }) {
+function* setPagination({ payload: {perPageNumber,  pageNumber} }) {
     try {
-        yield put(setLoadingState(true))
+        yield put(setLoadingState(true));
         const { data } = yield call(
             request,
             'GET',
             constructUrl([beerAPI], {
-                page: pageNumber,
-                per_page: perPageNumber
+                per_page: perPageNumber,
+                page: pageNumber
             })
         );
         yield put(getAllBeersSucceed(data));
+        yield put(setLoadingState(false));
+
+    } catch (e) {
+        yield put(setLoadingState(false));
+        yield put(requestError(e))
+    }
+}
+
+function* InfiniteScrollPagination({ payload: {perPageNumber,  pageNumber} }) {
+    try {
+        yield put(setLoadingState(true));
+        const { data } = yield call(
+            request,
+            'GET',
+            constructUrl([beerAPI], {
+                per_page: perPageNumber,
+                page: pageNumber
+            })
+        );
+        if (data.length > 0) {
+            yield put(getBeersPaginationSucceed(data));
+        }
         yield put(setLoadingState(false));
 
     } catch (e) {
@@ -111,6 +133,7 @@ export function* beerSaga() {
         takeLatest(BEER_ACTION_TYPE.GET_CERTAIN_BEER, getCertainBeer),
         takeLatest(BEER_ACTION_TYPE.GET_RANDOM_BEER, getRandomBeers),
         takeLatest(BEER_ACTION_TYPE.PAGINATION_REQUEST, setPagination),
+        takeLatest(BEER_ACTION_TYPE.INFINITE_SCROLL_BEERS, InfiniteScrollPagination),
         takeLatest(BEER_ACTION_TYPE.CLEAR_CERTAIN_BEER, clearCertainBeer),
     ])
 }

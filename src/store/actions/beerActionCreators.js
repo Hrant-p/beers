@@ -56,10 +56,24 @@ export function getAllBeersSucceed(data) {
     }
 }
 
-export function getPaginationRequest(pageNumber, perPageNumber) {
+export function getBeersPaginationSucceed(data) {
+    return {
+        type: BEER_ACTION_TYPE.GET_PAGINATION_BEER_SUCCEED,
+        payload: { data }
+    }
+}
+
+export function getPaginationRequest(perPageNumber, pageNumber) {
     return {
         type: BEER_ACTION_TYPE.PAGINATION_REQUEST,
-        payload: {pageNumber, perPageNumber}
+        payload: { perPageNumber, pageNumber }
+    }
+}
+
+export function infiniteScrollBeers(perPageNumber, pageNumber) {
+    return {
+        type: BEER_ACTION_TYPE.INFINITE_SCROLL_BEERS,
+        payload: { perPageNumber, pageNumber }
     }
 }
 

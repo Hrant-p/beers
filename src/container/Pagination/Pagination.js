@@ -3,8 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import {
     beersSelector,
-    isLoadingSelector,
-    pageSelector,
+    isLoadingSelector, pageSelector,
     perPageSelector
 } from "../../store/selectors/beerSelector";
 
@@ -12,11 +11,10 @@ class Pagination extends Component {
 
     handleChange = ({target: { value }}) => {
         const { pagination, page } = this.props
-        pagination(page, parseInt(value))
+        pagination(parseInt(value), page)
     };
 
     static propTypes = {
-        page: PropTypes.number,
         perPage: PropTypes.number
     };
 
@@ -26,7 +24,7 @@ class Pagination extends Component {
             <select
                 className="selectField"
                 onChange={this.handleChange}
-                value={this.props.perPage}
+                // value={this.props.perPage}
             >
                 <option value={25}>25</option>
                 <option value={50}>50</option>
@@ -37,8 +35,8 @@ class Pagination extends Component {
 };
 
 const mapStateToProps = state => ({
-    page: pageSelector(state),
-    perPage: perPageSelector(state)
+    perPage: perPageSelector(state),
+    page: pageSelector(state)
 });
 
 export default connect(mapStateToProps, {})(Pagination);
