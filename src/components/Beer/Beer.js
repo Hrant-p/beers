@@ -12,7 +12,7 @@ function Beer(props) {
         removeFromFavourite,
         beer
     } = props;
-
+    console.log(beer.size)
     return (
         <>
             {loading && <Spinner/>}

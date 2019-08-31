@@ -55,9 +55,10 @@ class Home extends Component {
     };
 
     drawBeers = () => {
-       const beers = this.props.beers;
-        return beers.map(
-            beer => (<Beer
+        return this.props.beers.map(
+            beer => {
+                console.log(beer.id)
+                return <Beer
                 beer={beer}
                 key={beer.get('id')}
                 loading={this.props.isLoading}
@@ -65,7 +66,7 @@ class Home extends Component {
                 handleFavourite={this.handleFavourite}
                 removeFromFavourite={this.removeFromFavourite}
                 clearFavourite={this.clearFavourite}
-            />)
+            />}
             )};
 
 

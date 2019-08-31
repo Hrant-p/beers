@@ -25,7 +25,7 @@ export default function (state = initialState, { type, payload }) {
                 .set('page', fromJS(payload.pageNumber));
         case BEER_ACTION_TYPE.GET_PAGINATION_BEER_SUCCEED:
             return state.update('beers', item =>
-                fromJS(item.push(...payload.data)));
+                item.concat(fromJS((payload.data))));
         case BEER_ACTION_TYPE.GET_CERTAIN_BEER_SUCCEED:
             return state.set('details', fromJS(payload.data));
         case BEER_ACTION_TYPE.GET_RANDOM_BEER_SUCCEED:
