@@ -1,19 +1,23 @@
 import React from 'react';
 import './Detail.scss';
+import Spinner from "../Spinner/Spinner";
+import Error from "../Error/Error";
 
-function Detail({ handleDetail, details, onClose, randomBeers }) {
+function Detail({ handleDetail, details, onClose, randomBeers, isLoading }) {
     const item = details.get(0);
-    console.log(randomBeers)
-    const beerItems = randomBeers.map(beer => (
+    let randoms = !randomBeers ? null : randomBeers.map(beer => (
+        <div className="random">
             <div key={beer.get('id')}>
-                {beer.get('name')}
-                {beer.get('tagline')}
+                    {beer.get('name')}
+                    {beer.get('tagline')}
                 <img
                     src={beer.get('image_url')}
                     alt={beer.get('name')}
                     onClick={() => handleDetail(beer.get('id'))}
                 />
             </div>
+        </div>
+
     ));
 
     return (
@@ -29,10 +33,9 @@ function Detail({ handleDetail, details, onClose, randomBeers }) {
                         alt={item.get('name')}
                     />
                     <h5>{item.get('description')}</h5>
-                    <div className="random">
-                        {beerItems}
-                    </div>
+                        {randoms}
                 </div>
+                {isLoading && <Spinner />}
             </div>
     )
 }

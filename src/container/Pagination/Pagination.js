@@ -23,7 +23,7 @@ class Pagination extends Component {
             <select
                 className="selectField"
                 onChange={this.handleChange}
-                // value={this.props.perPage}
+                value={this.props.perPage}
             >
                 <option value={25}>25</option>
                 <option value={50}>50</option>

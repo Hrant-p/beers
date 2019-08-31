@@ -6,8 +6,11 @@ const Navbar = () => {
 
         return (
             <nav>
-                <a href="/" >
+                <Link to="/">
                     Home
+                </Link>
+                <a href="/" >
+                    <i className="fas fa-retweet"/>
                 </a>
                 <Link to='/favourite'>
                     Favourite

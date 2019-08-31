@@ -8,7 +8,6 @@ function Beer(props) {
         loading,
         handleDetail,
         handleFavourite,
-        clearFavourite,
         removeFromFavourite,
         beer
     } = props;
@@ -21,9 +20,6 @@ function Beer(props) {
                 </button>
                 <button onClick={() => removeFromFavourite(beer.get('id'))}>
                     remove
-                </button>
-                <button onClick={clearFavourite}>
-                    clear
                 </button>
 
                 <h5>{beer.get('name')}</h5>

@@ -31,23 +31,24 @@ import {
     clearFavouriteList,
     removeFromFavoriteList
 } from "../../store/actions/favoriteActionCreator";
+import Error from "../../components/Error/Error";
 
 class Home extends Component {
     constructor(props){
         super(props);
-
-        this.state = {
-            page: 1,
-            areOver: false
-        };
-        window.onscroll = debounce(this.infiniteScroll, 300);
+        this.state = { areOver: false};
     }
 
     componentDidMount() {
         if (this.props.perPage === 25) {
             this.props.getAllBeersActionCreator();
         }
+        window.onscroll = debounce(this.infiniteScroll, 300);
     };
+
+    componentWillUnmount() {
+        window.onscroll = null;
+    }
 
     handleDetail = id => {
         this.props.beerDetailActionCreator(id);
@@ -63,10 +64,7 @@ class Home extends Component {
                 handleFavourite={this.handleFavourite}
                 removeFromFavourite={this.removeFromFavourite}
                 clearFavourite={this.clearFavourite}
-            />
-            );
-
-
+            />);
 
     handlePagination = (perPage, page) => {
         if (perPage * page > 324) {
@@ -95,16 +93,26 @@ class Home extends Component {
         addToFavoriteActionCreator(beers.toJS() , favouriteList.toJS(), id)
     };
 
-    clearFavourite = () => {
-        this.props.clearFavoriteActionCreator()
-    };
-
-    removeFromFavourite = (removeId) => {
+    removeFromFavourite = removeId => {
         this.props.removeFromFavouritesActionCreator(this.props.favouriteList.toJS(), removeId)
     };
 
+    drawDetails = () => {
+        const { details, random, error, isLoading } = this.props;
+        if (!details.size && error) return <Error />;
+        if (details.size) {
+            return  <Detail
+                details={details}
+                onClose={this.onClose}
+                randomBeers={random}
+                handleDetail={this.handleDetail}
+                isLoading={isLoading}
+            />
+        }
+    };
+
     render() {
-        const { details, random, isLoading } = this.props;
+        const { isLoading } = this.props;
         const { areOver } = this.state;
 
         return (
@@ -113,12 +121,7 @@ class Home extends Component {
                 <div className='beerContainer'>
                     {this.drawBeers()}
                     {isLoading && <Spinner/>}
-                    {details.size && <Detail
-                        details={details}
-                        onClose={this.onClose}
-                        randomBeers={random}
-                        handleDetail={this.handleDetail}
-                    />}
+                    {this.drawDetails()}
                 </div>
                 {areOver && <p>Beers ended</p>}
             </Fragment>
