@@ -2,7 +2,6 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators  } from 'redux';
 import {
-    addedToFavouriteListSucceed,
     addToFavouriteList,
     clearFavouriteList,
     removeFromFavoriteList
@@ -40,7 +39,9 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch =>
     bindActionCreators({
         removeFromFavouritesActionCreator: removeFromFavoriteList,
-        clearFavouritesActionCreator: clearFavouriteList
+        clearFavouritesActionCreator: clearFavouriteList,
+            addToFavoriteActionCreator: addToFavouriteList,
+
         }
     , dispatch);
 

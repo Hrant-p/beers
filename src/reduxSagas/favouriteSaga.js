@@ -2,7 +2,6 @@ import {all, put, takeLatest} from 'redux-saga/effects';
 import {requestError, setLoadingState} from "../store/actions/beerActionCreators";
 import {
     addedToFavouriteListSucceed,
-    addToFavouriteList,
     removeFromFavoriteListSucceed
 } from "../store/actions/favoriteActionCreator";
 import {FAVOURITE_ACTION_TYPE} from "../store/actions/actionTypes";
@@ -18,7 +17,7 @@ function* addToFavourite({ payload: { beersList, favouriteList,  id }}) {
 
  } catch (e) {
      yield put(setLoadingState(false));
-     yield put(requestError(e))
+     yield put(requestError(e));
     alert(e)
  }
 }
@@ -38,7 +37,7 @@ function* removeFromFavourites({ payload: { list, removeId }}) {
 
     } catch (e) {
         yield put(setLoadingState(false));
-        yield put(requestError(e))
+        yield put(requestError(e));
         alert(e)
     }
 }

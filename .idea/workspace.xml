@@ -4,10 +4,10 @@
     <list default="true" id="5136323a-303c-4a07-8f88-225123be7e79" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Beer/Beer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Beer/Beer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/container/Favourite/Favourite.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/container/Favourite/Favourite.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/container/Home/Home.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/container/Home/Home.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/container/Pagination/Page.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/container/Pagination/Pagination.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/container/Pagination/Pagination.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/reducers/beerReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/reducers/beerReducer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/reduxSagas/beerSaga.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/reduxSagas/beerSaga.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/reduxSagas/favouriteSaga.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/reduxSagas/favouriteSaga.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -100,7 +100,7 @@
       <workItem from="1565630362319" duration="55621000" />
       <workItem from="1566060107756" duration="24966000" />
       <workItem from="1566496689746" duration="9487000" />
-      <workItem from="1566842767520" duration="46329000" />
+      <workItem from="1566842767520" duration="49277000" />
     </task>
     <servers />
   </component>

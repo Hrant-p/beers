@@ -40,7 +40,7 @@ class Home extends Component {
             page: 1,
             areOver: false
         };
-        window.onscroll = debounce(this.infiniteScroll, 100);
+        window.onscroll = debounce(this.infiniteScroll, 300);
     }
 
     componentDidMount() {
@@ -54,11 +54,8 @@ class Home extends Component {
         this.props.getRandomBeerActionCreator();
     };
 
-    drawBeers = () => {
-        return this.props.beers.map(
-            beer => {
-                console.log(beer.id)
-                return <Beer
+    drawBeers = () => this.props.beers.map(beer =>
+            <Beer
                 beer={beer}
                 key={beer.get('id')}
                 loading={this.props.isLoading}
@@ -66,8 +63,8 @@ class Home extends Component {
                 handleFavourite={this.handleFavourite}
                 removeFromFavourite={this.removeFromFavourite}
                 clearFavourite={this.clearFavourite}
-            />}
-            )};
+            />
+            );
 
 
 
@@ -79,17 +76,13 @@ class Home extends Component {
     };
 
     infiniteScroll = () => {
-        const { isLoading, error, page, perPage } = this.props;
+        const { isLoading, error, page, perPage, infinitePaginationActionCreator } = this.props;
         const { documentElement } = document;
         if (error || isLoading) return;
         if (window.innerHeight + documentElement.scrollTop === documentElement.offsetHeight) {
-            if (perPage * page > 324) {
-                this.setState({
-                    areOver: true
-                });
-                return;
-            }
-            this.props.infinitePaginationActionCreator(perPage, page + 1);
+            perPage * page > 324 ? this.setState({
+                areOver: true
+            }) : infinitePaginationActionCreator(perPage, page + 1);
         }
     };
 

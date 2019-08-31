@@ -1,6 +1,5 @@
 import { put, call, all, takeLatest } from 'redux-saga/effects';
 import {
-    clearBeerDetails,
     getAllBeersSucceed,
     getBeersPaginationSucceed,
     getCertainBeerRequestSuccess,
@@ -52,20 +51,16 @@ function* getRandomBeers() {
     try {
         yield put(setLoadingState(true));
 
-        const url = yield constructUrl([beerAPI, 'random'], {})
+        const url = yield constructUrl([beerAPI, 'random'], {});
         const { data } = yield call(request,'GET', url);
         const _data = yield call(request,'GET', url);
         const __data = yield call(request,'GET', url);
-        const beerArr = yield [
-                ...data,
-                ..._data.data,
-                ...__data.data
-        ];
-        yield put(getRandomBeerRequestSuccess(beerArr));
+        const randomBeerArr = yield data.concat(_data.data, __data.data);
+        yield put(getRandomBeerRequestSuccess(randomBeerArr));
         yield put(setLoadingState(false))
 
     } catch (e) {
-        yield put(setLoadingState(false))
+        yield put(setLoadingState(false));
         yield put(requestError(e))
     }
 }
