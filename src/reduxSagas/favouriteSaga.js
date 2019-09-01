@@ -6,11 +6,11 @@ import {
 } from "../store/actions/favoriteActionCreator";
 import {FAVOURITE_ACTION_TYPE} from "../store/actions/actionTypes";
 
-function* addToFavourite({ payload: { beersList, favouriteList,  id }}) {
+function* addToFavourite({ payload: { beersList, favouriteList, id }}) {
  try {
      yield put(setLoadingState(true));
-     const arr = yield beersList.filter(item => item.id === id);
-     if (favouriteList.filter(fav => fav.id === id).length < 1) {
+     const arr = yield beersList.filter(item => item.get('id') === id);
+     if (favouriteList.filter(fav => fav.id === id).size < 1) {
          yield put(addedToFavouriteListSucceed(arr))
      }
      yield put(setLoadingState(false));
@@ -25,12 +25,10 @@ function* addToFavourite({ payload: { beersList, favouriteList,  id }}) {
 function* removeFromFavourites({ payload: { list, removeId }}) {
     try {
         yield put(setLoadingState(true));
-        const favouriteItem = yield list.filter(item => item.id === removeId)
+        const favouriteItem = yield list.filter(item => item.get('id') === removeId);
         const index = yield list.indexOf(...favouriteItem);
         if (index > -1) {
-            const newList = yield [
-                ...list.slice(0, index), ...list.slice(index + 1)
-            ];
+            const newList = yield list.slice(0, index).concat(list.slice(index + 1));
             yield put(removeFromFavoriteListSucceed(newList))
         }
         yield put(setLoadingState(false));

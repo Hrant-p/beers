@@ -4,6 +4,17 @@
   align-items: center;
   border: 1px solid gray;
   box-shadow: 0 2px 2px 0 gray;
+  .star {
+    width: 20px;
+    height: 20px;
+    transition-delay: 2s;
+    cursor: pointer;
+  }
+  .highlight {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+  }
   p{
     height: 50px;
   }

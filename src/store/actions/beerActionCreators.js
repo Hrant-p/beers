@@ -14,17 +14,17 @@ export function getAllBeersRequest() {
    }
 }
 
-export function getCertainBeerRequest(id) {
+export function getCertainBeerRequest(id, history) {
     return {
         type: BEER_ACTION_TYPE.GET_CERTAIN_BEER,
-        payload: { id }
+        payload: { id, history }
     }
 }
 
-export function clearBeerDetails() {
+export function clearBeerDetails(history) {
     return {
         type: BEER_ACTION_TYPE.CLEAR_CERTAIN_BEER,
-        payload: {}
+        payload: { history }
     }
 }
 

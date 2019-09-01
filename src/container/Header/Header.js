@@ -12,6 +12,9 @@ class Header extends Component {
                         type="text"
                         placeholder="Search For beer name"
                     />
+                    <button>
+                        Advanced Search
+                    </button>
                 </div>
             </header>
         );

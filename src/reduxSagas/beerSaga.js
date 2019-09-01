@@ -29,7 +29,7 @@ function* getAllBeers() {
     }
 }
 
-function* getCertainBeer({ payload : { id } }) {
+function* getCertainBeer({ payload : { id, history } }) {
     try {
         yield put(setLoadingState(true));
         const { data } = yield call(
@@ -38,7 +38,12 @@ function* getCertainBeer({ payload : { id } }) {
             constructUrl([beerAPI, id], {})
         );
         yield put(getCertainBeerRequestSuccess(data));
-        yield put(setLoadingState(false))
+        yield put(setLoadingState(false));
+        if (history.location.pathname.includes('beers')) {
+            yield history.push(`/beers/${id}`);
+        } else if (history.location.pathname.includes('favourite')) {
+            yield history.push(`/favourite/${id}`);
+        }
 
     } catch (e) {
         yield put(setLoadingState(false));
@@ -65,12 +70,17 @@ function* getRandomBeers() {
     }
 }
 
-function* clearCertainBeer() {
+function* clearCertainBeer({ payload: { history }}) {
     try {
         yield put(setLoadingState(true));
         yield put(getCertainBeerRequestSuccess([]));
         yield put(getRandomBeerRequestSuccess([]));
         yield put(setLoadingState(false))
+        if (history.location.pathname.includes('beers')) {
+            yield history.push(`/beers`);
+        } else if (history.location.pathname.includes('favourite')) {
+            yield history.push(`/favourite`);
+        }
 
     } catch (e) {
         yield put(setLoadingState(false));

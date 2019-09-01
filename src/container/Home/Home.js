@@ -32,16 +32,28 @@ import {
     removeFromFavoriteList
 } from "../../store/actions/favoriteActionCreator";
 import Error from "../../components/Error/Error";
+import {withRouter} from "react-router";
 
 class Home extends Component {
     constructor(props){
         super(props);
-        this.state = { areOver: false};
+        this.state = {areOver: false};
     }
 
     componentDidMount() {
-        if (this.props.perPage === 25) {
-            this.props.getAllBeersActionCreator();
+        const {
+            perPage,
+            isLoading,
+            getAllBeersActionCreator,
+            details,
+            match : { params }
+        } = this.props;
+
+        if (perPage === 25 && !isLoading) {
+            getAllBeersActionCreator();
+        }
+        if(params.id && details.size === 0 && !isLoading) {
+            this.handleDetail(params.id, [])
         }
         window.onscroll = debounce(this.infiniteScroll, 300);
     };
@@ -50,8 +62,8 @@ class Home extends Component {
         window.onscroll = null;
     }
 
-    handleDetail = id => {
-        this.props.beerDetailActionCreator(id);
+    handleDetail = (id, history) => {
+        this.props.beerDetailActionCreator(parseInt(id), history);
         this.props.getRandomBeerActionCreator();
     };
 
@@ -64,6 +76,7 @@ class Home extends Component {
                 handleFavourite={this.handleFavourite}
                 removeFromFavourite={this.removeFromFavourite}
                 clearFavourite={this.clearFavourite}
+                favouriteList={this.props.favouriteList}
             />);
 
     handlePagination = (perPage, page) => {
@@ -84,17 +97,17 @@ class Home extends Component {
         }
     };
 
-    onClose = () => {
-        this.props.clearDetailActionCreator()
+    onClose = history => {
+        this.props.clearDetailActionCreator(history)
     };
 
     handleFavourite = id => {
         const {addToFavoriteActionCreator, beers, favouriteList} = this.props;
-        addToFavoriteActionCreator(beers.toJS() , favouriteList.toJS(), id)
+        addToFavoriteActionCreator(beers , favouriteList, id)
     };
 
     removeFromFavourite = removeId => {
-        this.props.removeFromFavouritesActionCreator(this.props.favouriteList.toJS(), removeId)
+        this.props.removeFromFavouritesActionCreator(this.props.favouriteList, removeId)
     };
 
     drawDetails = () => {
@@ -160,4 +173,4 @@ Home.propTypes = {
     isLoading: PropTypes.bool
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Home));

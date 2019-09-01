@@ -1,5 +1,5 @@
 import React from 'react';
-import { Switch, BrowserRouter, Route} from "react-router-dom";
+import { Switch, BrowserRouter, Route, Redirect} from "react-router-dom";
 import './App.css';
 import Header from "./container/Header/Header";
 import Home from "./container/Home/Home";
@@ -8,16 +8,16 @@ import Navbar from "./components/Navbar/Navbar";
 
 function App() {
   return (
-    <React.Fragment>
       <BrowserRouter>
         <Navbar/>
         <Header />
         <Switch>
-          <Route path='/' component={Home} exact />
-          <Route path='/favourite' component={Favourite} exact />
+          <Route path="/" render={() => <Redirect to="/beers/" />} exact/>
+          <Route path={['/beers/', "/beers/:id"]} component={Home} exact/>
+          <Route path={['/favourite/', "/favourite/:id"]} component={Favourite} exact />
+          <Route render={() => <h2>Page Not Found...</h2>} />
         </Switch>
       </BrowserRouter>
-    </React.Fragment>
   );
 }
 

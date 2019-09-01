@@ -9,12 +9,12 @@ const Navbar = () => {
                 <Link to="/">
                     Home
                 </Link>
-                <a href="/" >
-                    <i className="fas fa-retweet"/>
-                </a>
                 <Link to='/favourite'>
                     Favourite
                 </Link>
+                <a href="/" >
+                    <i className="fas fa-retweet"/>
+                </a>
             </nav>
         )
 }

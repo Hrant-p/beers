@@ -1,19 +1,27 @@
 import React from 'react';
 import './Detail.scss';
-import Spinner from "../Spinner/Spinner";
-import Error from "../Error/Error";
+import {withRouter} from "react-router";
 
-function Detail({ handleDetail, details, onClose, randomBeers, isLoading }) {
+function Detail(props) {
+    const {
+        handleDetail,
+        details,
+        onClose,
+        randomBeers,
+        history
+    } = props;
+
     const item = details.get(0);
+    const id = item.get('id')
     let randoms = !randomBeers ? null : randomBeers.map(beer => (
-        <div className="random">
-            <div key={beer.get('id')}>
+        <div className="random" key={id}>
+            <div>
                     {beer.get('name')}
                     {beer.get('tagline')}
                 <img
                     src={beer.get('image_url')}
                     alt={beer.get('name')}
-                    onClick={() => handleDetail(beer.get('id'))}
+                    onClick={() => handleDetail(id, history)}
                 />
             </div>
         </div>
@@ -23,7 +31,7 @@ function Detail({ handleDetail, details, onClose, randomBeers, isLoading }) {
     return (
             <div className='detailContainer'>
                 <div className="details">
-                    <span onClick={onClose}>
+                    <span onClick={() => onClose(history)}>
                         <i className='far fa-times-circle' />
                     </span>
                     {item.get('name')}
@@ -35,9 +43,8 @@ function Detail({ handleDetail, details, onClose, randomBeers, isLoading }) {
                     <h5>{item.get('description')}</h5>
                         {randoms}
                 </div>
-                {isLoading && <Spinner />}
             </div>
     )
 }
 
-export default Detail;
+export default withRouter(Detail);

@@ -15,20 +15,24 @@ import {
 } from "../../store/selectors/beerSelector";
 import { favouriteListSelector } from "../../store/selectors/favouriteSelector";
 import Beer from "../../components/Beer/Beer";
-import {clearBeerDetails, getCertainBeerRequest, getRandomBeerRequest} from "../../store/actions/beerActionCreators";
+import {
+    clearBeerDetails,
+    getCertainBeerRequest,
+    getRandomBeerRequest
+} from "../../store/actions/beerActionCreators";
 import Detail from "../../components/Detail/Detail";
 import Spinner from "../../components/Spinner/Spinner";
 import Error from "../../components/Error/Error";
 
 class Favourite extends Component {
 
-    handleDetail = id => {
-        this.props.beerDetailActionCreator(id);
+    handleDetail = (id, history) => {
+        this.props.beerDetailActionCreator(parseInt(id), history);
     };
 
     handleFavourite = id => {
         const {addToFavoriteActionCreator, beers, favouriteList} = this.props;
-        addToFavoriteActionCreator(beers.toJS() , favouriteList.toJS(), id)
+        addToFavoriteActionCreator(beers, favouriteList, id)
     };
 
     clearFavourite = () => {
@@ -36,24 +40,26 @@ class Favourite extends Component {
     };
 
     removeFromFavourite = removeId => {
-        this.props.removeFromFavouritesActionCreator(this.props.favouriteList.toJS(), removeId)
+        this.props.removeFromFavouritesActionCreator(this.props.favouriteList, removeId)
     };
 
     onClose = () => {
-        this.props.clearDetailActionCreator()
+        this.props.clearDetailActionCreator(this.props.history)
     };
 
 
     handleBeers = () => {
-        const { favouriteList } = this.props;
-        if (!favouriteList.size) {
+        const { favouriteList, isLoading } = this.props;
+        if (favouriteList.size < 1) {
             return <p>You are not selected favourite beers</p>
         }
 
         return favouriteList.map(beer =>
             <Beer
+                key={beer.get('id')}
                 beer={beer}
-                loading={this.props.isLoading}
+                loading={isLoading}
+                favouriteList={favouriteList}
                 handleDetail={this.handleDetail}
                 handleFavourite={this.handleFavourite}
                 clearFavourite={this.clearFavourite}
@@ -63,14 +69,17 @@ class Favourite extends Component {
     };
 
     drawDetails = () => {
-        const { details, random, error } = this.props;
-        if (!details.size && error) return <Error />;
+        const { details, random, error, isLoading } = this.props;
+        if (!details.size && error) {
+            return <Error />
+        }
         if (details.size) {
             return  <Detail
                 details={details}
                 onClose={this.onClose}
                 randomBeers={random}
                 handleDetail={this.handleDetail}
+                isLoading={isLoading}
             />
         }
     };
