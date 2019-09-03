@@ -1,16 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import {
-    pageSelector,
-    perPageSelector
-} from "../../store/selectors/beerSelector";
+import { perPageSelector } from "../../store/selectors/beerSelector";
 
 class Pagination extends Component {
 
     handleChange = ({target: { value }}) => {
-        const { pagination, page } = this.props
-        pagination(parseInt(value), page)
+        this.props.pagination(parseInt(value), 1);
     };
 
     static propTypes = {
@@ -35,7 +31,6 @@ class Pagination extends Component {
 
 const mapStateToProps = state => ({
     perPage: perPageSelector(state),
-    page: pageSelector(state)
 });
 
 export default connect(mapStateToProps, {})(Pagination);

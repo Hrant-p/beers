@@ -1,6 +1,7 @@
 import React from 'react';
 import './Detail.scss';
-import {withRouter} from "react-router";
+import { withRouter } from "react-router";
+import Star from '../Star/Star';
 
 function Detail(props) {
     const {
@@ -8,29 +9,40 @@ function Detail(props) {
         details,
         onClose,
         randomBeers,
-        history
+        history,
+        favouriteList,
+        handleFavourite,
+        removeFromFavourite,
     } = props;
 
     const item = details.get(0);
-    const id = item.get('id')
     let randoms = !randomBeers ? null : randomBeers.map(beer => (
-        <div className="random" key={id}>
+        <div
+            className="random"
+            key={beer.get('id')}>
             <div>
-                    {beer.get('name')}
-                    {beer.get('tagline')}
+                {beer.get('name')}
+                {beer.get('tagline')}
                 <img
                     src={beer.get('image_url')}
                     alt={beer.get('name')}
-                    onClick={() => handleDetail(id, history)}
+                    onClick={() => handleDetail(beer.get('id'), history)}
                 />
             </div>
         </div>
-
     ));
+
 
     return (
             <div className='detailContainer'>
                 <div className="details">
+                    <Star
+                        favouriteList={favouriteList}
+                        removeFromFavourite={removeFromFavourite}
+                        handleFavourite={handleFavourite}
+                        id={item.get('id')}
+                        random={randomBeers}
+                    />
                     <span onClick={() => onClose(history)}>
                         <i className='far fa-times-circle' />
                     </span>

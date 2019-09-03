@@ -24,12 +24,12 @@ function* getAllBeers() {
         yield put(setLoadingState(false))
 
     } catch (e) {
-        yield put(setLoadingState(false))
+        yield put(setLoadingState(false));
         yield put(requestError(e))
     }
 }
 
-function* getCertainBeer({ payload : { id, history } }) {
+function* getCertainBeer({ payload : { id, history }}) {
     try {
         yield put(setLoadingState(true));
         const { data } = yield call(
@@ -39,16 +39,18 @@ function* getCertainBeer({ payload : { id, history } }) {
         );
         yield put(getCertainBeerRequestSuccess(data));
         yield put(setLoadingState(false));
-        if (history.location.pathname.includes('beers')) {
+        const { pathname } = yield history.location;
+        if (pathname.includes('beers')) {
             yield history.push(`/beers/${id}`);
-        } else if (history.location.pathname.includes('favourite')) {
+        } else if (pathname.includes('favourite')) {
             yield history.push(`/favourite/${id}`);
         }
 
     } catch (e) {
         yield put(setLoadingState(false));
-        yield put(requestError(e))
+        yield put(requestError(e));
         yield put(getCertainBeerRequestSuccess([]));
+        console.log(e)
     }
 }
 
@@ -60,13 +62,14 @@ function* getRandomBeers() {
         const { data } = yield call(request,'GET', url);
         const _data = yield call(request,'GET', url);
         const __data = yield call(request,'GET', url);
-        const randomBeerArr = yield data.concat(_data.data, __data.data);
-        yield put(getRandomBeerRequestSuccess(randomBeerArr));
+        const randomBeers = yield data.concat(_data.data, __data.data);
+        yield put(getRandomBeerRequestSuccess(randomBeers));
         yield put(setLoadingState(false))
 
     } catch (e) {
         yield put(setLoadingState(false));
         yield put(requestError(e))
+        console.log(e)
     }
 }
 
@@ -84,7 +87,7 @@ function* clearCertainBeer({ payload: { history }}) {
 
     } catch (e) {
         yield put(setLoadingState(false));
-        alert(e)
+        console.log(e)
     }
 }
 
@@ -105,7 +108,8 @@ function* setPagination({ payload: {perPageNumber,  pageNumber} }) {
 
     } catch (e) {
         yield put(setLoadingState(false));
-        yield put(requestError(e))
+        yield put(requestError(e));
+        console.log(e)
     }
 }
 
@@ -127,7 +131,8 @@ function* InfiniteScrollPagination({ payload: {perPageNumber,  pageNumber} }) {
 
     } catch (e) {
         yield put(setLoadingState(false));
-        yield put(requestError(e))
+        yield put(requestError(e));
+        console.log(e)
     }
 }
 

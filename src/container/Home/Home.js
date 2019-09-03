@@ -35,7 +35,7 @@ import Error from "../../components/Error/Error";
 import {withRouter} from "react-router";
 
 class Home extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
         this.state = {areOver: false};
     }
@@ -46,14 +46,15 @@ class Home extends Component {
             isLoading,
             getAllBeersActionCreator,
             details,
-            match : { params }
+            match,
+            history
         } = this.props;
 
         if (perPage === 25 && !isLoading) {
             getAllBeersActionCreator();
         }
-        if(params.id && details.size === 0 && !isLoading) {
-            this.handleDetail(params.id, [])
+        if(match.params.id && details.size === 0 && !isLoading) {
+            this.handleDetail(match.params.id, history)
         }
         window.onscroll = debounce(this.infiniteScroll, 300);
     };
@@ -68,22 +69,20 @@ class Home extends Component {
     };
 
     drawBeers = () => this.props.beers.map(beer =>
-            <Beer
-                beer={beer}
-                key={beer.get('id')}
-                loading={this.props.isLoading}
-                handleDetail={this.handleDetail}
-                handleFavourite={this.handleFavourite}
-                removeFromFavourite={this.removeFromFavourite}
-                clearFavourite={this.clearFavourite}
-                favouriteList={this.props.favouriteList}
-            />);
+        <Beer
+            beer={beer}
+            key={beer.get('id')}
+            loading={this.props.isLoading}
+            handleDetail={this.handleDetail}
+            handleFavourite={this.handleFavourite}
+            removeFromFavourite={this.removeFromFavourite}
+            clearFavourite={this.clearFavourite}
+            favouriteList={this.props.favouriteList}
+        />
+    );
 
-    handlePagination = (perPage, page) => {
-        if (perPage * page > 324) {
-            return this.props.paginationActionCreator(perPage, 1)
-        }
-        this.props.paginationActionCreator(perPage, page)
+    handlePagination = perPage => {
+        this.props.paginationActionCreator(perPage, 1)
     };
 
     infiniteScroll = () => {
@@ -111,16 +110,19 @@ class Home extends Component {
     };
 
     drawDetails = () => {
-        const { details, random, error, isLoading } = this.props;
+        const { details, random, error, isLoading, favouriteList } = this.props;
         if (!details.size && error) return <Error />;
         if (details.size) {
-            return  <Detail
+            return <Detail
                 details={details}
                 onClose={this.onClose}
                 randomBeers={random}
                 handleDetail={this.handleDetail}
+                handleFavourite={this.handleFavourite}
+                removeFromFavourite={this.removeFromFavourite}
                 isLoading={isLoading}
-            />
+                favouriteList={favouriteList}
+            />;
         }
     };
 
@@ -133,12 +135,12 @@ class Home extends Component {
                 <Pagination pagination={this.handlePagination} />
                 <div className='beerContainer'>
                     {this.drawBeers()}
-                    {isLoading && <Spinner/>}
+                    {isLoading && <Spinner />}
                     {this.drawDetails()}
                 </div>
                 {areOver && <p>Beers ended</p>}
             </Fragment>
-        )
+        );
     }
 }
 

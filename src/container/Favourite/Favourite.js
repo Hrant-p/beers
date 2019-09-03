@@ -69,7 +69,7 @@ class Favourite extends Component {
     };
 
     drawDetails = () => {
-        const { details, random, error, isLoading } = this.props;
+        const { details, error, isLoading, favouriteList } = this.props;
         if (!details.size && error) {
             return <Error />
         }
@@ -77,9 +77,11 @@ class Favourite extends Component {
             return  <Detail
                 details={details}
                 onClose={this.onClose}
-                randomBeers={random}
                 handleDetail={this.handleDetail}
                 isLoading={isLoading}
+                favouriteList={favouriteList}
+                removeFromFavourite={this.removeFromFavourite}
+                handleFavourite={this.handleFavourite}
             />
         }
     };

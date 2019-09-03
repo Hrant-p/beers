@@ -1,24 +1,35 @@
-import {all, put, takeLatest} from 'redux-saga/effects';
+import {all, call, put, takeLatest} from 'redux-saga/effects';
 import {requestError, setLoadingState} from "../store/actions/beerActionCreators";
 import {
     addedToFavouriteListSucceed,
     removeFromFavoriteListSucceed
 } from "../store/actions/favoriteActionCreator";
-import {FAVOURITE_ACTION_TYPE} from "../store/actions/actionTypes";
+import { FAVOURITE_ACTION_TYPE } from "../store/actions/actionTypes";
+import {request} from "../services/requestService";
+import {constructUrl} from "../API/helpers";
+import {beerAPI} from "../API/apiConsts";
 
 function* addToFavourite({ payload: { beersList, favouriteList, id }}) {
  try {
      yield put(setLoadingState(true));
      const arr = yield beersList.filter(item => item.get('id') === id);
-     if (favouriteList.filter(fav => fav.id === id).size < 1) {
+     const { size } = favouriteList.filter(fav => fav.get('id') === id);
+     if (arr.size > 0 && size < 1) {
          yield put(addedToFavouriteListSucceed(arr))
+     } else if (arr.size < 1 && size < 1) {
+         const { data } = yield call(
+             request,
+             'GET',
+             constructUrl([beerAPI, id], {})
+         );
+         yield put(addedToFavouriteListSucceed(data))
      }
      yield put(setLoadingState(false));
 
  } catch (e) {
      yield put(setLoadingState(false));
      yield put(requestError(e));
-    alert(e)
+    console.log(e)
  }
 }
 
@@ -36,7 +47,7 @@ function* removeFromFavourites({ payload: { list, removeId }}) {
     } catch (e) {
         yield put(setLoadingState(false));
         yield put(requestError(e));
-        alert(e)
+        console.log(e)
     }
 }
 
@@ -49,7 +60,7 @@ function* clearFavourites () {
     } catch (e) {
         yield put(setLoadingState(false));
         yield put(requestError(e));
-        alert(e)
+        console.log(e)
     }
 }
 
