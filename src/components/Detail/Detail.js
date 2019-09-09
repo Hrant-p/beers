@@ -32,7 +32,6 @@ function Detail(props) {
         </div>
     ));
 
-
     return (
             <div className='detailContainer'>
                 <div className="details">

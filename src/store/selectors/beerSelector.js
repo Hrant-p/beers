@@ -6,5 +6,5 @@ export const pageSelector = state => beerSelector(state).get('page');
 export const perPageSelector = state => beerSelector(state).get('perPage');
 export const detailsSelector = state => beerSelector(state).get('details');
 export const randomSelector = state => beerSelector(state).get('random');
-export const errorSelector = state => beersSelector(state).get('error')
-
+export const errorSelector = state => beerSelector(state).get('error');
+export const searchSelector = state => beerSelector(state).get('searchResult');

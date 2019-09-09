@@ -1,11 +1,12 @@
 import { fromJS } from "immutable";
-import {BEER_ACTION_TYPE, LOADING_ACTION_TYPE} from "../actions/actionTypes";
+import {BEER_ACTION_TYPE, LOADING_ACTION_TYPE, SEARCH_ACTION_TYPE} from "../actions/actionTypes";
 
 const initialState = fromJS({
     page: 1,
     perPage: 25,
     beers: [],
     details: [],
+    searchResult: [],
     random: [],
     isLoading: false,
     error: null
@@ -30,6 +31,8 @@ export default function (state = initialState, { type, payload }) {
             return state.set('details', fromJS(payload.data));
         case BEER_ACTION_TYPE.GET_RANDOM_BEER_SUCCEED:
             return state.set('random', fromJS(payload.data));
+        case SEARCH_ACTION_TYPE.SEARCH_RESULT_SUCCEED:
+            return state.set('searchResult', fromJS(payload.result));
         case BEER_ACTION_TYPE.REQUEST_ERROR_STATE:
             return state.set('error', fromJS(payload.errorMessage));
         case LOADING_ACTION_TYPE.SET_LOADING_STATE:

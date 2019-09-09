@@ -16,7 +16,8 @@ import {
     isLoadingSelector,
     pageSelector,
     perPageSelector,
-    randomSelector
+    randomSelector,
+    searchSelector
 } from "../../store/selectors/beerSelector";
 import Beer from "../../components/Beer/Beer";
 import Pagination from "../Pagination/Pagination";
@@ -47,7 +48,7 @@ class Home extends Component {
             getAllBeersActionCreator,
             details,
             match,
-            history
+            history,
         } = this.props;
 
         if (perPage === 25 && !isLoading) {
@@ -56,7 +57,7 @@ class Home extends Component {
         if(match.params.id && details.size === 0 && !isLoading) {
             this.handleDetail(match.params.id, history)
         }
-        window.onscroll = debounce(this.infiniteScroll, 300);
+            window.onscroll = debounce(this.infiniteScroll, 300);
     };
 
     componentWillUnmount() {
@@ -68,7 +69,7 @@ class Home extends Component {
         this.props.getRandomBeerActionCreator();
     };
 
-    drawBeers = () => this.props.beers.map(beer =>
+    drawBeers = beers => beers.map(beer =>
         <Beer
             beer={beer}
             key={beer.get('id')}
@@ -86,9 +87,19 @@ class Home extends Component {
     };
 
     infiniteScroll = () => {
-        const { isLoading, error, page, perPage, infinitePaginationActionCreator } = this.props;
+        const { isLoading,
+            error,
+            page,
+            perPage,
+            infinitePaginationActionCreator,
+            searchResult
+        } = this.props;
         const { documentElement } = document;
-        if (error || isLoading) return;
+
+        if (error ||
+            isLoading ||
+            searchResult.size > 0 ||
+            typeof searchResult.get(0) === 'string') return;
         if (window.innerHeight + documentElement.scrollTop === documentElement.offsetHeight) {
             perPage * page > 324 ? this.setState({
                 areOver: true
@@ -109,8 +120,8 @@ class Home extends Component {
         this.props.removeFromFavouritesActionCreator(this.props.favouriteList, removeId)
     };
 
-    drawDetails = () => {
-        const { details, random, error, isLoading, favouriteList } = this.props;
+    drawDetails = details => {
+        const { random, error, isLoading, favouriteList } = this.props;
         if (!details.size && error) return <Error />;
         if (details.size) {
             return <Detail
@@ -127,18 +138,33 @@ class Home extends Component {
     };
 
     render() {
-        const { isLoading } = this.props;
+        const { isLoading, searchResult, error, beers, details } = this.props;
         const { areOver } = this.state;
+        let result = searchResult,
+            showPagination = true,
+            beerContent = beers;
+
+        if (typeof searchResult.get(0) === "string") {
+            result = [];
+        }
+        if (result.length === 0 || searchResult.size > 0) {
+            showPagination = false;
+            beerContent = result;
+        }
 
         return (
             <Fragment>
-                <Pagination pagination={this.handlePagination} />
-                <div className='beerContainer'>
-                    {this.drawBeers()}
-                    {isLoading && <Spinner />}
-                    {this.drawDetails()}
-                </div>
-                {areOver && <p>Beers ended</p>}
+                    <Fragment>
+                        {showPagination && <Pagination pagination={this.handlePagination}/>}
+                        <div className='beerContainer'>
+                            {this.drawBeers(beerContent)}
+                            {this.drawDetails(details)}
+                        </div>
+                        {areOver && <p>Beers ended</p>}
+                        {result.length === 0 && <p>Beers Not Found</p>}
+                    </Fragment>
+                {isLoading && <Spinner/>}
+                {error && <Error error={error}/>}
             </Fragment>
         );
     }
@@ -153,6 +179,7 @@ const mapStateToProps = state => ({
     random: randomSelector(state),
     error: errorSelector(state),
     favouriteList: favouriteListSelector(state),
+    searchResult: searchSelector(state)
 });
 
 const mapDispatchToProps = dispatch =>
@@ -166,7 +193,7 @@ const mapDispatchToProps = dispatch =>
             getRandomBeerActionCreator: getRandomBeerRequest,
             addToFavoriteActionCreator: addToFavouriteList,
             clearFavoriteActionCreator: clearFavouriteList,
-            removeFromFavouritesActionCreator: removeFromFavoriteList
+            removeFromFavouritesActionCreator: removeFromFavoriteList,
         },
     dispatch
     );
@@ -175,4 +202,4 @@ Home.propTypes = {
     isLoading: PropTypes.bool
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Home));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Home));

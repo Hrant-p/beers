@@ -10,7 +10,8 @@ import {
 import { request } from "../services/requestService";
 import { constructUrl } from "../API/helpers";
 import { beerAPI } from "../API/apiConsts";
-import { BEER_ACTION_TYPE } from "../store/actions/actionTypes";
+import {BEER_ACTION_TYPE, SEARCH_ACTION_TYPE} from "../store/actions/actionTypes";
+import {searchResultSucceed} from "../store/actions/searchActionCreators";
 
 function* getAllBeers() {
     try {
@@ -136,6 +137,34 @@ function* InfiniteScrollPagination({ payload: {perPageNumber,  pageNumber} }) {
     }
 }
 
+function* searchByBeerName({ payload : { name, beers }}) {
+    try {
+        yield put(setLoadingState(true));
+        const str = yield name.toString().toLowerCase();
+
+        let result;
+        if (beers && str !== '') {
+            result = yield beers.filter(item =>
+                item.get('name')
+                    .toLowerCase()
+                    .includes(str));
+            if (result.size < 1) {
+                result = yield [str]
+            }
+        }
+        if (!beers || str === '') {
+            result = yield []
+        }
+        yield put(searchResultSucceed(result));
+        yield put(setLoadingState(false));
+
+    } catch (e) {
+        yield put(setLoadingState(false));
+        requestError(e);
+        console.log(e)
+    }
+}
+
 
 export function* beerSaga() {
     yield all([
@@ -145,5 +174,6 @@ export function* beerSaga() {
         takeLatest(BEER_ACTION_TYPE.PAGINATION_REQUEST, setPagination),
         takeLatest(BEER_ACTION_TYPE.INFINITE_SCROLL_BEERS, InfiniteScrollPagination),
         takeLatest(BEER_ACTION_TYPE.CLEAR_CERTAIN_BEER, clearCertainBeer),
+        takeLatest(SEARCH_ACTION_TYPE.SEARCH_BY_NAME, searchByBeerName)
     ])
 }

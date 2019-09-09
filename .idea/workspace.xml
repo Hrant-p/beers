@@ -2,23 +2,25 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5136323a-303c-4a07-8f88-225123be7e79" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/components/Star/Star.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/store/actions/searchActionCreators.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Beer/Beer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Beer/Beer.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Detail/Detail.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Detail/Detail.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/container/Favourite/Favourite.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/container/Favourite/Favourite.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/container/Header/Header.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/container/Header/Header.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/container/Home/Home.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/container/Home/Home.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/container/Pagination/Pagination.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/container/Pagination/Pagination.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/img/blue-star.svg" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Star/img/blue-star.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/img/yellow-star.svg" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Star/img/yellow-star.svg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/reduxSagas/beerSaga.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/reduxSagas/beerSaga.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/reduxSagas/favouriteSaga.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/reduxSagas/favouriteSaga.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/actions/actionTypes.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/actions/actionTypes.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/actions/beerActionCreators.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/actions/beerActionCreators.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/reducers/beerReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/reducers/beerReducer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/selectors/beerSelector.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/selectors/beerSelector.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FavoritesManager">
+    <favorites_list name="beer" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -28,8 +30,8 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="ROOT_SYNC" value="DONT_SYNC" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1P4ERrLdkXz45e6uIACyXcm1c77" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -51,7 +53,7 @@
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="vcs.Git" />
+    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
     <property name="ts.external.directory.path" value="C:\Users\H\AppData\Local\JetBrains\WebStorm 2018.3.5\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
   </component>
   <component name="RecentsManager">
@@ -106,6 +108,18 @@
       <workItem from="1566060107756" duration="24966000" />
       <workItem from="1566496689746" duration="9487000" />
       <workItem from="1566842767520" duration="107593000" />
+      <workItem from="1567615873263" duration="13202000" />
+      <workItem from="1567856834544" duration="1000" />
+      <workItem from="1567856889589" duration="525000" />
+      <workItem from="1567862947058" duration="133000" />
+      <workItem from="1567863417322" duration="65000" />
+      <workItem from="1567867813141" duration="21000" />
+      <workItem from="1567872784040" duration="1097000" />
+      <workItem from="1567873933744" duration="4563000" />
+      <workItem from="1567882894931" duration="713000" />
+      <workItem from="1567887191053" duration="42000" />
+      <workItem from="1567922152888" duration="4177000" />
+      <workItem from="1567959943777" duration="24470000" />
     </task>
     <servers />
   </component>

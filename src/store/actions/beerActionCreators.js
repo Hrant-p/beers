@@ -1,4 +1,7 @@
-import { BEER_ACTION_TYPE, LOADING_ACTION_TYPE } from "./actionTypes";
+import {
+  BEER_ACTION_TYPE,
+  LOADING_ACTION_TYPE,
+} from "./actionTypes";
 
 export function setLoadingState(isLoading) {
     return {
