@@ -165,6 +165,33 @@ function* searchByBeerName({ payload : { name, beers }}) {
     }
 }
 
+function* advancedSearch({payload: { paramsObj, history }}) {
+    try {
+        yield put(setLoadingState(true));
+        let newObj = yield {};
+        let k;
+        for(k in paramsObj ) {
+            if (paramsObj[k]) {
+                newObj[k] = yield paramsObj[k]
+            }
+           console.log(newObj);
+        }
+        const { data } = yield call(
+            request,
+            'GET',
+            constructUrl([beerAPI], newObj)
+        );
+        yield put(searchResultSucceed(data));
+        yield history.push('/founded_beers');
+        yield put(setLoadingState(false));
+
+    } catch (e) {
+        yield put(setLoadingState(false));
+        requestError(e);
+        console.log(e)
+    }
+}
+
 
 export function* beerSaga() {
     yield all([
@@ -174,6 +201,7 @@ export function* beerSaga() {
         takeLatest(BEER_ACTION_TYPE.PAGINATION_REQUEST, setPagination),
         takeLatest(BEER_ACTION_TYPE.INFINITE_SCROLL_BEERS, InfiniteScrollPagination),
         takeLatest(BEER_ACTION_TYPE.CLEAR_CERTAIN_BEER, clearCertainBeer),
-        takeLatest(SEARCH_ACTION_TYPE.SEARCH_BY_NAME, searchByBeerName)
+        takeLatest(SEARCH_ACTION_TYPE.SEARCH_BY_NAME, searchByBeerName),
+        takeLatest(SEARCH_ACTION_TYPE.ADVANCED_SEARCH_BY_PARAMETERS, advancedSearch),
     ])
 }

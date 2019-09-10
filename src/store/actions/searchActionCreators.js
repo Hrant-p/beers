@@ -13,3 +13,10 @@ export function searchResultSucceed(result) {
         payload: { result }
     };
 }
+
+export function advancedSearchByParams(paramsObj, history) {
+    return {
+        type: SEARCH_ACTION_TYPE.ADVANCED_SEARCH_BY_PARAMETERS,
+        payload: { paramsObj, history }
+    }
+}

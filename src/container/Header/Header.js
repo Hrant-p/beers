@@ -5,6 +5,7 @@ import {beersSelector, errorSelector, isLoadingSelector, searchSelector} from ".
 import {bindActionCreators} from "redux";
 import {searchByName} from "../../store/actions/searchActionCreators";
 import {favouriteListSelector} from "../../store/selectors/favouriteSelector";
+import {withRouter} from "react-router";
 
 class Header extends Component {
 
@@ -30,7 +31,7 @@ class Header extends Component {
     };
 
     render() {
-
+        console.log(this.props.history);
         return (
             <header className="header">
                 <div className="info">
@@ -42,7 +43,7 @@ class Header extends Component {
                         placeholder="Search For beer name"
                         onChange={this.onChange}
                     />
-                    <button>
+                    <button onClick={() => this.props.history.push("/advanced_search")}>
                         Advanced Search
                     </button>
                 </div>
@@ -63,4 +64,4 @@ const mapDispatchToProps = dispatch => bindActionCreators({
     searchByNameActionCreator: searchByName
 }, dispatch);
 
-export default connect(mapStateToProps, mapDispatchToProps)(Header)
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Header))
