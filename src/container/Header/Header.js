@@ -4,6 +4,7 @@ import {connect} from "react-redux";
 import {beersSelector, errorSelector, isLoadingSelector, searchSelector} from "../../store/selectors/beerSelector";
 import {bindActionCreators} from "redux";
 import {searchByName} from "../../store/actions/searchActionCreators";
+import {favouriteListSelector} from "../../store/selectors/favouriteSelector";
 
 class Header extends Component {
 
@@ -12,10 +13,17 @@ class Header extends Component {
     };
 
     handleSearch = text => {
-        const {searchByNameActionCreator, beers, error, isLoading} = this.props;
+        const {searchByNameActionCreator, beers, error, isLoading, favouriteList} = this.props;
         if (error || isLoading) return;
+        let  beerCollection;
+        if (window.location.pathname.includes('beers')) {
+            beerCollection = beers;
+        }
+        if (window.location.pathname.includes('favourite')) {
+            beerCollection = favouriteList
+        }
         if (text) {
-            searchByNameActionCreator(text, beers);
+            searchByNameActionCreator(text, beerCollection);
         } else if (text === '') {
             searchByNameActionCreator(text, []);
         }
@@ -47,7 +55,8 @@ const mapStateToProps = state => ({
     beers: beersSelector(state),
     isLoading: isLoadingSelector(state),
     error: errorSelector(state),
-    searchResult: searchSelector(state)
+    searchResult: searchSelector(state),
+    favouriteList: favouriteListSelector(state)
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({

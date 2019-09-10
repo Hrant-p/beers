@@ -11,7 +11,7 @@ import {
     detailsSelector,
     isLoadingSelector,
     randomSelector,
-    beersSelector
+    beersSelector, searchSelector
 } from "../../store/selectors/beerSelector";
 import { favouriteListSelector } from "../../store/selectors/favouriteSelector";
 import Beer from "../../components/Beer/Beer";
@@ -48,9 +48,8 @@ class Favourite extends Component {
     };
 
 
-    handleBeers = () => {
-        const { favouriteList, isLoading } = this.props;
-        if (favouriteList.size < 1) {
+    handleBeers = favouriteList => {
+        if (this.props.favouriteList.size < 1) {
             return <p>You are not selected favourite beers</p>
         }
 
@@ -58,8 +57,8 @@ class Favourite extends Component {
             <Beer
                 key={beer.get('id')}
                 beer={beer}
-                loading={isLoading}
-                favouriteList={favouriteList}
+                loading={this.props.isLoading}
+                favouriteList={this.props.favouriteList}
                 handleDetail={this.handleDetail}
                 handleFavourite={this.handleFavourite}
                 clearFavourite={this.clearFavourite}
@@ -68,8 +67,8 @@ class Favourite extends Component {
         )
     };
 
-    drawDetails = () => {
-        const { details, error, isLoading, favouriteList } = this.props;
+    drawDetails = favouriteList => {
+        const { details, error, isLoading } = this.props;
         if (!details.size && error) {
             return <Error />
         }
@@ -79,7 +78,7 @@ class Favourite extends Component {
                 onClose={this.onClose}
                 handleDetail={this.handleDetail}
                 isLoading={isLoading}
-                favouriteList={favouriteList}
+                favouriteList={this.props.favouriteList}
                 removeFromFavourite={this.removeFromFavourite}
                 handleFavourite={this.handleFavourite}
             />
@@ -87,7 +86,14 @@ class Favourite extends Component {
     };
 
     render() {
-        const { isLoading } = this.props;
+        const { isLoading, details, favouriteList, searchResult } = this.props;
+        let list = favouriteList, result = searchResult;
+        if (typeof searchResult.get(0) === "string") {
+            result = [];
+        }
+        if (result.length === 0 || searchResult.size > 0) {
+            list = result;
+        }
 
         return (
             <Fragment>
@@ -97,9 +103,10 @@ class Favourite extends Component {
                     Remove All Favourites
                 </button>
                 <div className="beerContainer">
-                    {this.handleBeers()}
+                    {this.handleBeers(list)}
+                    {this.drawDetails(details)}
+                    {result.length === 0 && <p>No search result</p>}
                     {isLoading && <Spinner/>}
-                    {this.drawDetails()}
                 </div>
             </Fragment>
         );
@@ -113,6 +120,7 @@ const mapStateToProps = state => ({
     random: randomSelector(state),
     favouriteList: favouriteListSelector(state),
     beers: beersSelector(state),
+    searchResult: searchSelector(state)
 });
 
 const mapDispatchToProps = dispatch =>

@@ -2,16 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5136323a-303c-4a07-8f88-225123be7e79" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/store/actions/searchActionCreators.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Detail/Detail.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Detail/Detail.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/container/Favourite/Favourite.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/container/Favourite/Favourite.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/container/Header/Header.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/container/Header/Header.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/container/Home/Home.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/container/Home/Home.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/reduxSagas/beerSaga.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/reduxSagas/beerSaga.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/actions/actionTypes.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/actions/actionTypes.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/actions/beerActionCreators.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/actions/beerActionCreators.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/reducers/beerReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/reducers/beerReducer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/selectors/beerSelector.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/selectors/beerSelector.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -119,7 +112,7 @@
       <workItem from="1567882894931" duration="713000" />
       <workItem from="1567887191053" duration="42000" />
       <workItem from="1567922152888" duration="4177000" />
-      <workItem from="1567959943777" duration="24470000" />
+      <workItem from="1567959943777" duration="28130000" />
     </task>
     <servers />
   </component>
