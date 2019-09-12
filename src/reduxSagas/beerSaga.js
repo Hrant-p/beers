@@ -41,10 +41,12 @@ function* getCertainBeer({ payload : { id, history }}) {
         yield put(getCertainBeerRequestSuccess(data));
         yield put(setLoadingState(false));
         const { pathname } = yield history.location;
-        if (pathname.includes('beers')) {
-            yield history.push(`/beers/${id}`);
+        if (pathname.includes('founded')) {
+            yield history.push(`/founded_beers/${id}`)
         } else if (pathname.includes('favourite')) {
             yield history.push(`/favourite/${id}`);
+        } else if (pathname.includes('beers')) {
+            yield history.push(`/beers/${id}`);
         }
 
     } catch (e) {
@@ -79,15 +81,19 @@ function* clearCertainBeer({ payload: { history }}) {
         yield put(setLoadingState(true));
         yield put(getCertainBeerRequestSuccess([]));
         yield put(getRandomBeerRequestSuccess([]));
-        yield put(setLoadingState(false))
-        if (history.location.pathname.includes('beers')) {
+        yield put(setLoadingState(false));
+        const { pathname } =  yield history.location;
+        if (pathname.includes('founded')) {
+            yield history.goBack() || history.push('/founded_beers/')
+        } else if (pathname.includes('beers')) {
             yield history.push(`/beers`);
-        } else if (history.location.pathname.includes('favourite')) {
+        } else if (pathname.includes('favourite')) {
             yield history.push(`/favourite`);
         }
 
     } catch (e) {
         yield put(setLoadingState(false));
+        yield put(requestError(e));
         console.log(e)
     }
 }
@@ -174,7 +180,6 @@ function* advancedSearch({payload: { paramsObj, history }}) {
             if (paramsObj[k]) {
                 newObj[k] = yield paramsObj[k]
             }
-           console.log(newObj);
         }
         const { data } = yield call(
             request,
@@ -185,6 +190,19 @@ function* advancedSearch({payload: { paramsObj, history }}) {
         yield history.push('/founded_beers');
         yield put(setLoadingState(false));
 
+    } catch (e) {
+        yield put(setLoadingState(false));
+        requestError(e);
+        console.log(e)
+    }
+}
+
+function* clearSearchAndDetails() {
+    try {
+        yield put(setLoadingState(true));
+        yield put(searchResultSucceed([]));
+        yield put(getCertainBeerRequestSuccess([]))
+        yield put(setLoadingState(false));
     } catch (e) {
         yield put(setLoadingState(false));
         requestError(e);
@@ -203,5 +221,6 @@ export function* beerSaga() {
         takeLatest(BEER_ACTION_TYPE.CLEAR_CERTAIN_BEER, clearCertainBeer),
         takeLatest(SEARCH_ACTION_TYPE.SEARCH_BY_NAME, searchByBeerName),
         takeLatest(SEARCH_ACTION_TYPE.ADVANCED_SEARCH_BY_PARAMETERS, advancedSearch),
+        takeLatest(SEARCH_ACTION_TYPE.CLEAR_SEARCH_RESULT_AND_DETAILS, clearSearchAndDetails)
     ])
 }

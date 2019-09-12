@@ -20,3 +20,10 @@ export function advancedSearchByParams(paramsObj, history) {
         payload: { paramsObj, history }
     }
 }
+
+export function clearSearchResults() {
+    return {
+        type: SEARCH_ACTION_TYPE.CLEAR_SEARCH_RESULT_AND_DETAILS,
+        payload: {}
+    }
+}

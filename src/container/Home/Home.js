@@ -147,7 +147,7 @@ class Home extends Component {
         if (typeof searchResult.get(0) === "string") {
             result = [];
         }
-        if (result.length === 0 || searchResult.size > 0) {
+        if (result.length === 0 || searchResult.size > 0 ) {
             showPagination = false;
             beerContent = result;
         }
@@ -160,11 +160,19 @@ class Home extends Component {
                             {this.drawBeers(beerContent)}
                             {this.drawDetails(details)}
                         </div>
-                        {areOver && <p>Beers ended</p>}
-                        {result.length === 0 && <p>Beers Not Found</p>}
+                        {areOver && <h4
+                            style={{textAlign: 'center'}}>
+                            Beers ended
+                        </h4>}
+                        {result.length === 0 && <h2
+                            style={{textAlign: 'center'}}>
+                            Beers Not Found
+                        </h2>}
                     </Fragment>
                 {isLoading && <Spinner/>}
-                {error && <Error error={error}/>}
+                {error && <Error
+                    message={error.message}
+                    stack={error.stack}/>}
             </Fragment>
         );
     }

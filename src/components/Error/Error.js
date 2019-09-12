@@ -1,11 +1,15 @@
 import React from 'react';
 
-function Error({error}) {
+function Error({ message, stack }) {
     return (
-        <p>
-            Sorry, but something went wrong...
-            {error && <span>{error}</span>}
-        </p>
+        <section style={{textAlign: 'center'}}>
+            <h2>
+                {message}
+            </h2>
+            <span>
+                {stack}
+            </span>
+        </section>
     );
 }
 

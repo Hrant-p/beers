@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './header.scss';
+import './Header.scss';
 import {connect} from "react-redux";
 import {beersSelector, errorSelector, isLoadingSelector, searchSelector} from "../../store/selectors/beerSelector";
 import {bindActionCreators} from "redux";
@@ -8,8 +8,27 @@ import {favouriteListSelector} from "../../store/selectors/favouriteSelector";
 import {withRouter} from "react-router";
 
 class Header extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            text: ''
+        };
+    }
 
-    onChange = ({currentTarget: { value }}) => {
+    componentWillMount() {
+        this.unlisten = this.props.history.listen((location, action) => {
+            if (action === 'PUSH' || 'REPLACE') {
+                this.setState({text: ''})
+            }
+        });
+    }
+
+    componentWillUnmount() {
+        this.unlisten();
+    }
+
+    onChange = ({currentTarget: { name, value }}) => {
+        this.setState({[name]: value});
         this.handleSearch(value)
     };
 
@@ -31,7 +50,7 @@ class Header extends Component {
     };
 
     render() {
-        console.log(this.props.history);
+
         return (
             <header className="header">
                 <div className="info">
@@ -42,8 +61,11 @@ class Header extends Component {
                         name="text"
                         placeholder="Search For beer name"
                         onChange={this.onChange}
+                        value={this.state.text}
                     />
-                    <button onClick={() => this.props.history.push("/advanced_search")}>
+                    <button
+                        className="search-btn"
+                        onClick={() => this.props.history.push("/advanced_search")}>
                         Advanced Search
                     </button>
                 </div>
