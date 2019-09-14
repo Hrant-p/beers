@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Link, withRouter} from "react-router-dom";
+import { withRouter} from "react-router-dom";
 import './Navbar.scss'
 import {searchSelector} from "../../store/selectors/beerSelector";
 import {bindActionCreators} from "redux";

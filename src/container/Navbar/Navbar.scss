@@ -1,14 +1,18 @@
 nav{
-  position: fixed;
   width: 100%;
+  top: 0;
+  position: sticky;
+  padding: auto 10px;
   height: 50px;
+  margin: 0;
   background: darkorange;
   display: flex;
   flex-direction: row;
-  transition: ease-in 0.2s;
+  transition: ease-in-out 0.2s;
+  z-index: 1;
   .link{
     transition: ease-in 0.2s;
-    height: 100%;
+    padding: 10px;
     display: flex;
     margin: auto 10px;
     justify-content: center;
@@ -18,12 +22,17 @@ nav{
     background-color: transparent;
     font-size: 20px;
     cursor: pointer;
+    border-radius: 5px;
     &:hover {
       color: honeydew;
+      background-color: rgba(178, 46, 0, 0.37);
     }
     &:focus {
       color: #333333;
       border: none;
     }
+  }
+  a {
+    padding: 10px;
   }
 }

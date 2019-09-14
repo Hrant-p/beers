@@ -54,7 +54,14 @@ class Home extends Component {
         if (perPage === 25 && !isLoading) {
             getAllBeersActionCreator();
         }
-        if(match.params.id && details.size === 0 && !isLoading) {
+
+        if (match.params.id && typeof match.params.id !== "number") {
+            history.push('/')
+        }
+        if(match.params.id &&
+            typeof match.params.id === "number" &&
+            details.size === 0 &&
+            !isLoading) {
             this.handleDetail(match.params.id, history)
         }
             window.onscroll = debounce(this.infiniteScroll, 300);
@@ -140,6 +147,7 @@ class Home extends Component {
     render() {
         const { isLoading, searchResult, error, beers, details } = this.props;
         const { areOver } = this.state;
+
         let result = searchResult,
             showPagination = true,
             beerContent = beers;
@@ -155,11 +163,11 @@ class Home extends Component {
         return (
             <Fragment>
                     <Fragment>
-                        {showPagination && <Pagination pagination={this.handlePagination}/>}
                         <div className='beerContainer'>
+                        {showPagination && <Pagination pagination={this.handlePagination}/>}
                             {this.drawBeers(beerContent)}
-                            {this.drawDetails(details)}
                         </div>
+                        {this.drawDetails(details)}
                         {areOver && <h4
                             style={{textAlign: 'center'}}>
                             Beers ended

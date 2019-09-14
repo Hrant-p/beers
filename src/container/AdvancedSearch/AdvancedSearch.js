@@ -1,9 +1,15 @@
 import React, {Component} from 'react';
-import {detailsSelector, errorSelector, isLoadingSelector, searchSelector} from "../../store/selectors/beerSelector";
+import {
+    detailsSelector,
+    errorSelector,
+    isLoadingSelector,
+    searchSelector
+} from "../../store/selectors/beerSelector";
 import {bindActionCreators} from "redux";
 import {advancedSearchByParams} from "../../store/actions/searchActionCreators";
 import {connect} from "react-redux";
 import {withRouter} from "react-router";
+import './AdvancedSearch.scss'
 
 
 class AdvancedSearch extends Component {
@@ -48,7 +54,7 @@ class AdvancedSearch extends Component {
             <div className='search-container'>
                 <div className="search-field">
                     <label htmlFor="name">
-                        name
+                        Name
                     </label>
                     <input
                         type="search"
@@ -99,12 +105,12 @@ class AdvancedSearch extends Component {
 
                 </div>
                 <div className="search-field">
-                    <label htmlFor="">
+                    <label htmlFor="max_ABV">
                         Maximum ABV
                     </label>
                     <input
                         type="search"
-                        id="max_ABV"
+                        id=""
                         name="max_ABV"
                         value={this.state.max_ABV}
                         onChange={this.handleChange}
@@ -137,12 +143,12 @@ class AdvancedSearch extends Component {
                     />
                 </div>
                 <div className="search-field">
-                    <label htmlFor="">
+                    <label htmlFor="brewed_before">
                         Brewed before
                     </label>
                     <input
                         type="search"
-                        id="brewed_before"
+                        id=""
                         name="brewed_before"
                         value={this.state.brewed_before}
                         onChange={this.handleChange}

@@ -86,7 +86,7 @@ class Favourite extends Component {
     };
 
     render() {
-        const { isLoading, details, favouriteList, searchResult } = this.props;
+        const { isLoading, details, favouriteList, error, searchResult } = this.props;
         let list = favouriteList, result = searchResult;
         if (typeof searchResult.get(0) === "string") {
             result = [];
@@ -102,12 +102,16 @@ class Favourite extends Component {
                     onClick={this.clearFavourite}>
                     Remove All Favourites
                 </button>
+                {error && <Error
+                    message={error.message}
+                    stack={error.stack}/>}
                 <div className="beerContainer">
                     {this.handleBeers(list)}
-                    {this.drawDetails(details)}
-                    {result.length === 0 && <p>No search result</p>}
-                    {isLoading && <Spinner/>}
                 </div>
+                    {this.drawDetails(details)}
+                    {result.length === 0 && <p>
+                        No search result</p>}
+                    {isLoading && <Spinner />}
             </Fragment>
         );
     }

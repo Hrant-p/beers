@@ -32,7 +32,7 @@ function Star(props) {
             onClick={() => removeFromFavourite(id)}
         />;
 
-    return <span className="">
+    return <span className="star-icon">
         {starIcon}
     </span>
 }

@@ -59,7 +59,7 @@ class Header extends Component {
                     <input
                         type="search"
                         name="text"
-                        placeholder="Search For beer name"
+                        placeholder="search for beer name"
                         onChange={this.onChange}
                         value={this.state.text}
                     />
