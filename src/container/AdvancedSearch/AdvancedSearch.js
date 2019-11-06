@@ -28,18 +28,22 @@ class AdvancedSearch extends Component {
         }
     }
 
-    handleAdvancedSearch = (beer_name,
-                            min_IBU,
-                            max_IBU,
-                            min_ABV,
-                            max_ABV,
-                            min_EBC,
-                            max_EBC,
-                            brewed_before,
-                            brewed_after,
-                            history ) => {
-        const parametersObj = { beer_name, min_IBU, max_IBU, min_ABV, max_ABV, min_EBC,
-            max_EBC, brewed_before, brewed_after };
+    handleAdvancedSearch = (
+        beer_name,
+        min_IBU,
+        max_IBU,
+        min_ABV,
+        max_ABV,
+        min_EBC,
+        max_EBC,
+        brewed_before,
+        brewed_after,
+        history) => {
+
+        const parametersObj = {
+            beer_name, min_IBU, max_IBU, min_ABV, max_ABV, min_EBC,
+            max_EBC, brewed_before, brewed_after
+        };
 
         this.props.advancedSearchActionCreator(parametersObj, history)
     };
@@ -49,6 +53,17 @@ class AdvancedSearch extends Component {
     };
 
     render() {
+        const {
+            name,
+            min_IBU,
+            max_IBU,
+            min_ABV,
+            max_ABV,
+            min_EBC,
+            max_EBC,
+            brewed_before,
+            brewed_after
+        } = this.state;
 
         return (
             <div className='search-container'>
@@ -60,7 +75,7 @@ class AdvancedSearch extends Component {
                         type="search"
                         id="name"
                         name="name"
-                        value={this.state.name}
+                        value={name}
                         onChange={this.handleChange}
                     />
 
@@ -73,7 +88,7 @@ class AdvancedSearch extends Component {
                         type="search"
                         id="min_IBU"
                         name="min_IBU"
-                        value={this.state.min_IBU}
+                        value={min_IBU}
                         onChange={this.handleChange}
                     />
 
@@ -86,7 +101,7 @@ class AdvancedSearch extends Component {
                         type="search"
                         id="max_IBU"
                         name="max_IBU"
-                        value={this.state.max_IBU}
+                        value={max_IBU}
                         onChange={this.handleChange}
                     />
 
@@ -99,7 +114,7 @@ class AdvancedSearch extends Component {
                         type="search"
                         id="min_ABV"
                         name="min_ABV"
-                        value={this.state.min_ABV}
+                        value={min_ABV}
                         onChange={this.handleChange}
                     />
 
@@ -112,7 +127,7 @@ class AdvancedSearch extends Component {
                         type="search"
                         id=""
                         name="max_ABV"
-                        value={this.state.max_ABV}
+                        value={max_ABV}
                         onChange={this.handleChange}
                     />
 
@@ -125,7 +140,7 @@ class AdvancedSearch extends Component {
                         type="search"
                         id="min_EBC"
                         name="min_EBC"
-                        value={this.state.min_EBC}
+                        value={min_EBC}
                         onChange={this.handleChange}
                     />
 
@@ -138,7 +153,7 @@ class AdvancedSearch extends Component {
                         type="search"
                         id="max_EBC"
                         name="max_EBC"
-                        value={this.state.max_EBC}
+                        value={max_EBC}
                         onChange={this.handleChange}
                     />
                 </div>
@@ -150,7 +165,7 @@ class AdvancedSearch extends Component {
                         type="search"
                         id=""
                         name="brewed_before"
-                        value={this.state.brewed_before}
+                        value={brewed_before}
                         onChange={this.handleChange}
                     />
 
@@ -166,7 +181,7 @@ class AdvancedSearch extends Component {
                         type="search"
                         id="brewed_after"
                         name="brewed_after"
-                        value={this.state.brewed_after}
+                        value={brewed_after}
                         onChange={this.handleChange}
                     />
 
@@ -174,15 +189,15 @@ class AdvancedSearch extends Component {
                 <button
                     className="search-btn"
                     onClick={() => this.handleAdvancedSearch(
-                        this.state.name,
-                        this.state.min_IBU,
-                        this.state.max_IBU,
-                        this.state.min_ABV,
-                        this.state.max_ABV,
-                        this.state.min_EBC,
-                        this.state.max_EBC,
-                        this.state.brewed_before,
-                        this.state.brewed_after,
+                        name,
+                        min_IBU,
+                        max_IBU,
+                        min_ABV,
+                        max_ABV,
+                        min_EBC,
+                        max_EBC,
+                        brewed_before,
+                        brewed_after,
                         this.props.history
                     )}>
                     Search
@@ -202,6 +217,6 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch =>
     bindActionCreators({
         advancedSearchActionCreator: advancedSearchByParams
-    } , dispatch);
+    }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(AdvancedSearch))

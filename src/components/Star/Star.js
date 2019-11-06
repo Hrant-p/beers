@@ -1,6 +1,6 @@
-import React, {useEffect, useState} from 'react';
-import blue from "./img/blue-star.svg";
-import yellow from "./img/yellow-star.svg";
+import React, { useEffect, useState } from 'react';
+import blue from './img/blue-star.svg';
+import yellow from './img/yellow-star.svg';
 
 function Star(props) {
     const {
@@ -14,27 +14,33 @@ function Star(props) {
     const [className, setClassName] = useState('star');
 
         useEffect(() => {
-            favouriteList.filter(item => item.get('id') === id).size > 0 ?
-            setClassName('highlight') :
-            setClassName('star');
+            favouriteList.filter((item) => item.get('id') === id).size > 0
+            ? setClassName('highlight')
+            : setClassName('star');
     }, [favouriteList, id, details]);
 
-    let starIcon = className === 'star' ?
-        <img
+    const starIcon = className === 'star'
+        ? (
+          <img
             className={className}
             src={blue}
             alt='Add to favourites'
             onClick={() => handleFavourite(id)}
-        /> : <img
-            className={className}
-            src={yellow}
-            alt="Remove from favourites"
-            onClick={() => removeFromFavourite(id)}
-        />;
+          />
+) : (
+  <img
+    className={className}
+    src={yellow}
+    alt="Remove from favourites"
+    onClick={() => removeFromFavourite(id)}
+  />
+);
 
-    return <span className="star-icon">
+    return (
+      <span className="star-icon">
         {starIcon}
-    </span>
+      </span>
+);
 }
 
-export default Star
+export default Star;

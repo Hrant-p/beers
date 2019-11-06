@@ -1,4 +1,6 @@
-import { put, call, all, takeLatest } from 'redux-saga/effects';
+import {
+ put, call, all, takeLatest
+} from 'redux-saga/effects';
 import {
     getAllBeersSucceed,
     getBeersPaginationSucceed,
@@ -6,12 +8,12 @@ import {
     getRandomBeerRequestSuccess,
     requestError,
     setLoadingState
-} from "../store/actions/beerActionCreators";
-import { request } from "../services/requestService";
-import { constructUrl } from "../API/helpers";
-import { beerAPI } from "../API/apiConsts";
-import {BEER_ACTION_TYPE, SEARCH_ACTION_TYPE} from "../store/actions/actionTypes";
-import {searchResultSucceed} from "../store/actions/searchActionCreators";
+} from '../store/actions/beerActionCreators';
+import { request } from '../services/requestService';
+import { constructUrl } from '../API/helpers';
+import { beerAPI } from '../API/apiConsts';
+import { BEER_ACTION_TYPE, SEARCH_ACTION_TYPE } from '../store/actions/actionTypes';
+import { searchResultSucceed } from '../store/actions/searchActionCreators';
 
 function* getAllBeers() {
     try {
@@ -19,18 +21,18 @@ function* getAllBeers() {
         const { data } = yield call(
             request,
             'GET',
-            constructUrl([beerAPI], {})
+            constructUrl([beerAPI], {}),
         );
         yield put(getAllBeersSucceed(data));
-        yield put(setLoadingState(false))
+        yield put(setLoadingState(false));
 
     } catch (e) {
         yield put(setLoadingState(false));
-        yield put(requestError(e))
+        yield put(requestError(e));
     }
 }
 
-function* getCertainBeer({ payload : { id, history }}) {
+function* getCertainBeer({ payload: { id, history } }) {
     try {
         yield put(setLoadingState(true));
         const { data } = yield call(
@@ -63,9 +65,9 @@ function* getRandomBeers() {
 
         const url = yield constructUrl([beerAPI, 'random'], {});
         const [ first, second, third ] = yield all([
-            call(request,'GET', url),
-            call(request,'GET', url),
-            call(request,'GET', url),
+            call(request, 'GET', url),
+            call(request, 'GET', url),
+            call(request, 'GET', url),
         ]);
         const randomBeers = yield first.data.concat(second.data, third.data);
         yield put(getRandomBeerRequestSuccess(randomBeers));
@@ -84,13 +86,13 @@ function* clearCertainBeer({ payload: { history }}) {
         yield put(getCertainBeerRequestSuccess([]));
         yield put(getRandomBeerRequestSuccess([]));
         yield put(setLoadingState(false));
-        const { pathname } =  yield history.location;
+        const { pathname } = yield history.location;
         if (pathname.includes('founded')) {
-            yield history.goBack() || history.push('/founded_beers/')
+            yield history.goBack() || history.push('/founded_beers/');
         } else if (pathname.includes('beers')) {
-            yield history.push(`/beers`);
+            yield history.push('/beers');
         } else if (pathname.includes('favourite')) {
-            yield history.push(`/favourite`);
+            yield history.push('/favourite');
         }
 
     } catch (e) {
@@ -101,7 +103,7 @@ function* clearCertainBeer({ payload: { history }}) {
 }
 
 
-function* setPagination({ payload: {perPageNumber,  pageNumber} }) {
+function* setPagination({ payload: { perPageNumber, pageNumber } }) {
     try {
         yield put(setLoadingState(true));
         const { data } = yield call(
@@ -178,7 +180,7 @@ function* advancedSearch({payload: { paramsObj, history }}) {
         yield put(setLoadingState(true));
         let newObj = yield {};
         let k;
-        for(k in paramsObj ) {
+        for (k in paramsObj ) {
             if (paramsObj[k]) {
                 newObj[k] = yield paramsObj[k]
             }
@@ -195,7 +197,7 @@ function* advancedSearch({payload: { paramsObj, history }}) {
     } catch (e) {
         yield put(setLoadingState(false));
         requestError(e);
-        console.log(e)
+        console.log(e);
     }
 }
 
@@ -224,5 +226,5 @@ export function* beerSaga() {
         takeLatest(SEARCH_ACTION_TYPE.SEARCH_BY_NAME, searchByBeerName),
         takeLatest(SEARCH_ACTION_TYPE.ADVANCED_SEARCH_BY_PARAMETERS, advancedSearch),
         takeLatest(SEARCH_ACTION_TYPE.CLEAR_SEARCH_RESULT_AND_DETAILS, clearSearchAndDetails)
-    ])
+    ]);
 }
