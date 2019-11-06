@@ -62,17 +62,19 @@ function* getRandomBeers() {
         yield put(setLoadingState(true));
 
         const url = yield constructUrl([beerAPI, 'random'], {});
-        const { data } = yield call(request,'GET', url);
-        const _data = yield call(request,'GET', url);
-        const __data = yield call(request,'GET', url);
-        const randomBeers = yield data.concat(_data.data, __data.data);
+        const [ first, second, third ] = yield all([
+            call(request,'GET', url),
+            call(request,'GET', url),
+            call(request,'GET', url),
+        ]);
+        const randomBeers = yield first.data.concat(second.data, third.data);
         yield put(getRandomBeerRequestSuccess(randomBeers));
         yield put(setLoadingState(false))
 
     } catch (e) {
         yield put(setLoadingState(false));
-        yield put(requestError(e))
-        console.log(e)
+        yield put(requestError(e));
+        console.warn(e)
     }
 }
 
@@ -94,7 +96,7 @@ function* clearCertainBeer({ payload: { history }}) {
     } catch (e) {
         yield put(setLoadingState(false));
         yield put(requestError(e));
-        console.log(e)
+        console.warn(e)
     }
 }
 
