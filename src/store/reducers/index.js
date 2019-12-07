@@ -3,6 +3,6 @@ import beerReducer from './beerReducer';
 import favouriteReducer from './favouriteReducer';
 
 export default combineReducers({
-    beerReducer,
-    favouriteReducer
+  beerReducer,
+  favouriteReducer,
 });

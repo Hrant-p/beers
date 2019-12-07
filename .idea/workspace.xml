@@ -2,16 +2,46 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5136323a-303c-4a07-8f88-225123be7e79" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.eslintrc.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/.eslintrc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.eslintrc.json" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/API/apiConsts.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/API/apiConsts.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/API/helpers.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/API/helpers.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Beer/Beer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Beer/Beer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Detail/Detail.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Detail/Detail.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Error/Error.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Error/Error.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Spinner/Spinner.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Spinner/Spinner.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Star/Star.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Star/Star.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/container/AdvancedSearch/AdvancedSearch.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/container/AdvancedSearch/AdvancedSearch.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/container/Beers/BeerInfo.js" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/container/Beers/BeerInfo.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/container/Favourite/Favourite.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/container/Favourite/Favourite.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/container/FoundedBeers/FoundedBeers.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/container/FoundedBeers/FoundedBeers.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/container/Header/Header.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/container/Header/Header.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/container/Home/Home.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/container/Home/Home.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/container/Navbar/Navbar.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/container/Navbar/Navbar.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/container/Pagination/Pagination.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/container/Pagination/Pagination.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/reduxSagas/beerSaga.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/reduxSagas/beerSaga.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/reduxSagas/favouriteSaga.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/reduxSagas/favouriteSaga.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/requestService.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/requestService.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/actions/actionTypes.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/actions/actionTypes.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/actions/beerActionCreators.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/actions/beerActionCreators.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/actions/favoriteActionCreator.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/actions/favoriteActionCreator.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/actions/searchActionCreators.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/actions/searchActionCreators.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/middlewares/middleware.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/middlewares/middleware.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/reducers/beerReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/reducers/beerReducer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/reducers/favouriteReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/reducers/favouriteReducer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/reducers/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/reducers/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/selectors/beerSelector.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/selectors/beerSelector.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/selectors/favouriteSelector.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/selectors/favouriteSelector.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/store.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/store.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -53,7 +83,7 @@
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="watcher.settings" />
+    <property name="settings.editor.selected.configurable" value="settings.javascript.linters.eslint" />
     <property name="ts.external.directory.path" value="C:\Users\H\AppData\Local\JetBrains\WebStorm 2018.3.5\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
   </component>
   <component name="RecentsManager">
@@ -77,8 +107,18 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="npm.npm start">
+  <component name="RunManager" selected="npm.lint">
     <configuration name="Debug Application" type="JavascriptDebugType" uri="http://localhost:3000">
+      <method v="2" />
+    </configuration>
+    <configuration name="lint" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="lint" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
       <method v="2" />
     </configuration>
     <configuration name="npm start" type="js.build_tools.npm">
@@ -91,6 +131,11 @@
       <envs />
       <method v="2" />
     </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="npm.lint" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -122,7 +167,9 @@
       <workItem from="1567959943777" duration="50530000" />
       <workItem from="1568271613201" duration="26636000" />
       <workItem from="1568397299365" duration="20324000" />
-      <workItem from="1573026940701" duration="7687000" />
+      <workItem from="1573026940701" duration="7932000" />
+      <workItem from="1574602134246" duration="2710000" />
+      <workItem from="1575742656643" duration="3707000" />
     </task>
     <servers />
   </component>

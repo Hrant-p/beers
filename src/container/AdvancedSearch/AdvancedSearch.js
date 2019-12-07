@@ -1,34 +1,46 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router';
+import { advancedSearchByParams } from '../../store/actions/searchActionCreators';
 import {
-    detailsSelector,
-    errorSelector,
-    isLoadingSelector,
-    searchSelector
-} from "../../store/selectors/beerSelector";
-import {bindActionCreators} from "redux";
-import {advancedSearchByParams} from "../../store/actions/searchActionCreators";
-import {connect} from "react-redux";
-import {withRouter} from "react-router";
-import './AdvancedSearch.scss'
+  detailsSelector,
+  errorSelector,
+  isLoadingSelector,
+  searchSelector,
+} from '../../store/selectors/beerSelector';
+import './AdvancedSearch.scss';
 
 
 class AdvancedSearch extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            name: '',
-            min_IBU: '',
-            max_IBU: '',
-            min_ABV:  '',
-            max_ABV: '',
-            min_EBC: '',
-            max_EBC: '',
-            brewed_before: '',
-            brewed_after: ''
-        }
-    }
+  constructor(props) {
+    super(props);
+    this.state = {
+      name: '',
+      min_IBU: '',
+      max_IBU: '',
+      min_ABV: '',
+      max_ABV: '',
+      min_EBC: '',
+      max_EBC: '',
+      brewed_before: '',
+      brewed_after: '',
+    };
+  }
 
     handleAdvancedSearch = (
+      beer_name,
+      min_IBU,
+      max_IBU,
+      min_ABV,
+      max_ABV,
+      min_EBC,
+      max_EBC,
+      brewed_before,
+      brewed_after,
+      history,
+    ) => {
+      const parametersObj = {
         beer_name,
         min_IBU,
         max_IBU,
@@ -38,185 +50,178 @@ class AdvancedSearch extends Component {
         max_EBC,
         brewed_before,
         brewed_after,
-        history) => {
+      };
 
-        const parametersObj = {
-            beer_name, min_IBU, max_IBU, min_ABV, max_ABV, min_EBC,
-            max_EBC, brewed_before, brewed_after
-        };
-
-        this.props.advancedSearchActionCreator(parametersObj, history)
+      this.props.advancedSearchActionCreator(parametersObj, history);
     };
 
-    handleChange = ({currentTarget : { name, value }}) => {
-        this.setState({[name]: value})
+    handleChange = ({ currentTarget: { name, value } }) => {
+      this.setState({ [name]: value });
     };
 
     render() {
-        const {
-            name,
-            min_IBU,
-            max_IBU,
-            min_ABV,
-            max_ABV,
-            min_EBC,
-            max_EBC,
-            brewed_before,
-            brewed_after
-        } = this.state;
+      const {
+        name,
+        min_IBU,
+        max_IBU,
+        min_ABV,
+        max_ABV,
+        min_EBC,
+        max_EBC,
+        brewed_before,
+        brewed_after,
+      } = this.state;
 
-        return (
-            <div className='search-container'>
-                <div className="search-field">
-                    <label htmlFor="name">
+      return (
+        <div className="search-container">
+          <div className="search-field">
+            <label htmlFor="name">
                         Name
-                    </label>
-                    <input
-                        type="search"
-                        id="name"
-                        name="name"
-                        value={name}
-                        onChange={this.handleChange}
-                    />
+            </label>
+            <input
+              type="search"
+              id="name"
+              name="name"
+              value={name}
+              onChange={this.handleChange}
+            />
 
-                </div>
-                <div className="search-field">
-                    <label htmlFor="min_IBU">
+          </div>
+          <div className="search-field">
+            <label htmlFor="min_IBU">
                         Minimum IBU
-                    </label>
-                    <input
-                        type="search"
-                        id="min_IBU"
-                        name="min_IBU"
-                        value={min_IBU}
-                        onChange={this.handleChange}
-                    />
+            </label>
+            <input
+              type="search"
+              id="min_IBU"
+              name="min_IBU"
+              value={min_IBU}
+              onChange={this.handleChange}
+            />
 
-                </div>
-                <div className="search-field">
-                    <label htmlFor="max_IBU">
+          </div>
+          <div className="search-field">
+            <label htmlFor="max_IBU">
                         Maximum IBU
-                    </label>
-                    <input
-                        type="search"
-                        id="max_IBU"
-                        name="max_IBU"
-                        value={max_IBU}
-                        onChange={this.handleChange}
-                    />
+            </label>
+            <input
+              type="search"
+              id="max_IBU"
+              name="max_IBU"
+              value={max_IBU}
+              onChange={this.handleChange}
+            />
 
-                </div>
-                <div className="search-field">
-                    <label htmlFor="min_ABV">
+          </div>
+          <div className="search-field">
+            <label htmlFor="min_ABV">
                         Minimum ABV
-                    </label>
-                    <input
-                        type="search"
-                        id="min_ABV"
-                        name="min_ABV"
-                        value={min_ABV}
-                        onChange={this.handleChange}
-                    />
+            </label>
+            <input
+              type="search"
+              id="min_ABV"
+              name="min_ABV"
+              value={min_ABV}
+              onChange={this.handleChange}
+            />
 
-                </div>
-                <div className="search-field">
-                    <label htmlFor="max_ABV">
+          </div>
+          <div className="search-field">
+            <label htmlFor="max_ABV">
                         Maximum ABV
-                    </label>
-                    <input
-                        type="search"
-                        id=""
-                        name="max_ABV"
-                        value={max_ABV}
-                        onChange={this.handleChange}
-                    />
+            </label>
+            <input
+              type="search"
+              id=""
+              name="max_ABV"
+              value={max_ABV}
+              onChange={this.handleChange}
+            />
 
-                </div>
-                <div className="search-field">
-                    <label htmlFor="min_EBC">
+          </div>
+          <div className="search-field">
+            <label htmlFor="min_EBC">
                         Minimum EBC
-                    </label>
-                    <input
-                        type="search"
-                        id="min_EBC"
-                        name="min_EBC"
-                        value={min_EBC}
-                        onChange={this.handleChange}
-                    />
+            </label>
+            <input
+              type="search"
+              id="min_EBC"
+              name="min_EBC"
+              value={min_EBC}
+              onChange={this.handleChange}
+            />
 
-                </div>
-                <div className="search-field">
-                    <label htmlFor="max_EBC">
+          </div>
+          <div className="search-field">
+            <label htmlFor="max_EBC">
                         Maximum EBC
-                    </label>
-                    <input
-                        type="search"
-                        id="max_EBC"
-                        name="max_EBC"
-                        value={max_EBC}
-                        onChange={this.handleChange}
-                    />
-                </div>
-                <div className="search-field">
-                    <label htmlFor="brewed_before">
+            </label>
+            <input
+              type="search"
+              id="max_EBC"
+              name="max_EBC"
+              value={max_EBC}
+              onChange={this.handleChange}
+            />
+          </div>
+          <div className="search-field">
+            <label htmlFor="brewed_before">
                         Brewed before
-                    </label>
-                    <input
-                        type="search"
-                        id=""
-                        name="brewed_before"
-                        value={brewed_before}
-                        onChange={this.handleChange}
-                    />
+            </label>
+            <input
+              type="search"
+              id=""
+              name="brewed_before"
+              value={brewed_before}
+              onChange={this.handleChange}
+            />
 
-                </div>
-                <div className="search-field">
-
-                </div>
-                <div className="search-field">
-                    <label htmlFor="">
+          </div>
+          <div className="search-field" />
+          <div className="search-field">
+            <label htmlFor="">
                         Brewed after
-                    </label>
-                    <input
-                        type="search"
-                        id="brewed_after"
-                        name="brewed_after"
-                        value={brewed_after}
-                        onChange={this.handleChange}
-                    />
+            </label>
+            <input
+              type="search"
+              id="brewed_after"
+              name="brewed_after"
+              value={brewed_after}
+              onChange={this.handleChange}
+            />
 
-                </div>
-                <button
-                    className="search-btn"
-                    onClick={() => this.handleAdvancedSearch(
-                        name,
-                        min_IBU,
-                        max_IBU,
-                        min_ABV,
-                        max_ABV,
-                        min_EBC,
-                        max_EBC,
-                        brewed_before,
-                        brewed_after,
-                        this.props.history
-                    )}>
+          </div>
+          <button
+            className="search-btn"
+            onClick={() => this.handleAdvancedSearch(
+              name,
+              min_IBU,
+              max_IBU,
+              min_ABV,
+              max_ABV,
+              min_EBC,
+              max_EBC,
+              brewed_before,
+              brewed_after,
+              this.props.history,
+            )}
+          >
                     Search
-                </button>
-            </div>
-        );
+          </button>
+        </div>
+      );
     }
-};
+}
 
-const mapStateToProps = state => ({
-    searchResult: searchSelector(state),
-    error: errorSelector(state),
-    isLoading: isLoadingSelector(state),
-    details: detailsSelector(state)
+const mapStateToProps = (state) => ({
+  searchResult: searchSelector(state),
+  error: errorSelector(state),
+  isLoading: isLoadingSelector(state),
+  details: detailsSelector(state),
 });
 
-const mapDispatchToProps = dispatch =>
-    bindActionCreators({
-        advancedSearchActionCreator: advancedSearchByParams
-    }, dispatch);
+const mapDispatchToProps = (dispatch) => bindActionCreators({
+  advancedSearchActionCreator: advancedSearchByParams,
+}, dispatch);
 
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(AdvancedSearch))
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(AdvancedSearch));
