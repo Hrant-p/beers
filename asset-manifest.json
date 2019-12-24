@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/beer/static/css/main.2508ad24.chunk.css",
-    "main.js": "/beer/static/js/main.b8dc4670.chunk.js",
-    "main.js.map": "/beer/static/js/main.b8dc4670.chunk.js.map",
-    "runtime-main.js": "/beer/static/js/runtime-main.aa929c7a.js",
-    "runtime-main.js.map": "/beer/static/js/runtime-main.aa929c7a.js.map",
-    "static/js/2.6383e699.chunk.js": "/beer/static/js/2.6383e699.chunk.js",
-    "static/js/2.6383e699.chunk.js.map": "/beer/static/js/2.6383e699.chunk.js.map",
-    "index.html": "/beer/index.html",
-    "precache-manifest.29ae64aac6e1e2e88f1f9f78b1c06813.js": "/beer/precache-manifest.29ae64aac6e1e2e88f1f9f78b1c06813.js",
-    "service-worker.js": "/beer/service-worker.js",
-    "static/css/main.2508ad24.chunk.css.map": "/beer/static/css/main.2508ad24.chunk.css.map",
-    "static/js/2.6383e699.chunk.js.LICENSE": "/beer/static/js/2.6383e699.chunk.js.LICENSE",
-    "static/media/blue-star.svg": "/beer/static/media/blue-star.aa3da263.svg",
-    "static/media/yellow-star.svg": "/beer/static/media/yellow-star.9e8af3de.svg"
+    "main.css": "/beers/static/css/main.2508ad24.chunk.css",
+    "main.js": "/beers/static/js/main.b8dc4670.chunk.js",
+    "main.js.map": "/beers/static/js/main.b8dc4670.chunk.js.map",
+    "runtime-main.js": "/beers/static/js/runtime-main.852eb18a.js",
+    "runtime-main.js.map": "/beers/static/js/runtime-main.852eb18a.js.map",
+    "static/js/2.6383e699.chunk.js": "/beers/static/js/2.6383e699.chunk.js",
+    "static/js/2.6383e699.chunk.js.map": "/beers/static/js/2.6383e699.chunk.js.map",
+    "index.html": "/beers/index.html",
+    "precache-manifest.8effcbcdb85b98d2afd8eb0c359f66a3.js": "/beers/precache-manifest.8effcbcdb85b98d2afd8eb0c359f66a3.js",
+    "service-worker.js": "/beers/service-worker.js",
+    "static/css/main.2508ad24.chunk.css.map": "/beers/static/css/main.2508ad24.chunk.css.map",
+    "static/js/2.6383e699.chunk.js.LICENSE": "/beers/static/js/2.6383e699.chunk.js.LICENSE",
+    "static/media/blue-star.svg": "/beers/static/media/blue-star.aa3da263.svg",
+    "static/media/yellow-star.svg": "/beers/static/media/yellow-star.9e8af3de.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.aa929c7a.js",
+    "static/js/runtime-main.852eb18a.js",
     "static/js/2.6383e699.chunk.js",
     "static/css/main.2508ad24.chunk.css",
     "static/js/main.b8dc4670.chunk.js"
