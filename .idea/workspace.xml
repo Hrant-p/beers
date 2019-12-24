@@ -3,14 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="5136323a-303c-4a07-8f88-225123be7e79" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Detail/Detail.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Detail/Detail.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/container/AdvancedSearch/AdvancedSearch.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/container/AdvancedSearch/AdvancedSearch.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/container/Header/Header.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/container/Header/Header.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/container/Home/Home.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/container/Home/Home.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/container/Navbar/Navbar.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/container/Navbar/Navbar.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/container/Pagination/Pagination.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/container/Pagination/Pagination.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/reduxSagas/beerSaga.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/reduxSagas/beerSaga.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -76,8 +70,18 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="npm.lint">
+  <component name="RunManager" selected="npm.deploy">
     <configuration name="Debug Application" type="JavascriptDebugType" uri="http://localhost:3000">
+      <method v="2" />
+    </configuration>
+    <configuration name="deploy" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="deploy" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
       <method v="2" />
     </configuration>
     <configuration name="lint" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
@@ -102,6 +106,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="npm.deploy" />
         <item itemvalue="npm.lint" />
       </list>
     </recent_temporary>
@@ -141,6 +146,7 @@
       <workItem from="1575742656643" duration="4909000" />
       <workItem from="1577017646962" duration="9129000" />
       <workItem from="1577178766761" duration="27000" />
+      <workItem from="1577178917309" duration="2741000" />
     </task>
     <servers />
   </component>
