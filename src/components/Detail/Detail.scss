@@ -10,7 +10,7 @@
   justify-content: center;
   align-items: center;
   overflow: hidden;
-
+  transition: 0.3s ease-in-out;
 
   .details {
     padding: 20px 20px 0 20px;
@@ -25,6 +25,11 @@
     height: 80%;
     position: fixed;
     background: whitesmoke;
+    span {
+      &:hover {
+        cursor: pointer;
+      }
+    }
     img {
       height: 100%;
       grid-area: image;
@@ -70,7 +75,7 @@
       right: 25px;
       width: 50px;
       height: 50px;
-      transition: ease-in 0.2s;
+      transition: 0.3s ease-in-out;
       cursor: pointer;
     }
       i{
@@ -89,7 +94,7 @@
       width: 100%;
       padding-left: 10px;
       padding-right: 10px;
-      transition: ease-in 0.3s;
+      transition: 0.3s ease-in-out;
       grid-gap: 10px;
       grid-template-areas:  "b img"
                             "h5 img"
@@ -97,16 +102,16 @@
       img {
         cursor: pointer;
         grid-area: img;
-        transition: ease-in 0.3s;
+        transition: 0.3s ease-in-out;
       }
       b {
         grid-area: b;
-        transition: ease-in 0.3s;
+        transition: 0.3s ease-in-out;
         text-align: center;
       }
       h5 {
         grid-area: h5;
-        transition: ease-in 0.3s;
+        transition: 0.3s ease-in-out;
         text-align: center;
       }
     }

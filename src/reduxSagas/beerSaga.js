@@ -145,12 +145,12 @@ function* searchByBeerName({ payload: { name, beers } }) {
   try {
     yield put(setLoadingState(true));
     const str = yield name.toString().toLowerCase();
-
     let result;
     if (beers && str !== '') {
-      result = yield beers.filter((item) => item.get('name')
-        .toLowerCase()
-        .includes(str));
+      result = yield beers
+        .filter((item) => item.get('name')
+          .toLowerCase()
+          .includes(str));
       if (result.size < 1) {
         result = yield [str];
       }
@@ -170,17 +170,10 @@ function* searchByBeerName({ payload: { name, beers } }) {
 function* advancedSearch({ payload: { paramsObj, history } }) {
   try {
     yield put(setLoadingState(true));
-    const newObj = yield {};
-    let k;
-    for (k in paramsObj) {
-      if (paramsObj[k]) {
-        newObj[k] = yield paramsObj[k];
-      }
-    }
     const { data } = yield call(
       request,
       'GET',
-      constructUrl([beerAPI], newObj),
+      constructUrl([beerAPI], paramsObj),
     );
     yield put(searchResultSucceed(data));
     yield history.push('/founded_beers');
@@ -204,7 +197,6 @@ function* clearSearchAndDetails() {
     console.log(e);
   }
 }
-
 
 export function* beerSaga() {
   yield all([

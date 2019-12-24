@@ -8,10 +8,11 @@ import { clearSearchResults } from '../../store/actions/searchActionCreators';
 
 class Navbar extends Component {
     clearSearchResultHome = () => {
-      if (this.props.searchResult) {
-        this.props.clearSearchActionCreator();
+      const {searchResult, clearSearchActionCreator, history} = this.props
+      if (searchResult) {
+        clearSearchActionCreator();
       }
-      this.props.history.push('/beers');
+      history.push('/beers');
     };
 
     clearSearchResultFavourite = () => {

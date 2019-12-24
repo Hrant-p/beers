@@ -16,7 +16,7 @@ class AdvancedSearch extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: '',
+      beer_name: '',
       min_IBU: '',
       max_IBU: '',
       min_ABV: '',
@@ -28,19 +28,22 @@ class AdvancedSearch extends Component {
     };
   }
 
-    handleAdvancedSearch = (
-      beer_name,
-      min_IBU,
-      max_IBU,
-      min_ABV,
-      max_ABV,
-      min_EBC,
-      max_EBC,
-      brewed_before,
-      brewed_after,
-      history,
-    ) => {
-      const parametersObj = {
+    handleAdvancedSearch = (history, stateObj) => {
+      const filteredObj = {};
+      for (const [key, value] of Object.entries(stateObj)) {
+        if (value) {
+          Object.assign(filteredObj, { [key]: value });
+        }
+      }
+      this.props.advancedSearchActionCreator(filteredObj, history);
+    };
+
+    handleChange = ({ currentTarget: { name, value } }) => {
+      this.setState({ [name]: value });
+    };
+
+    render() {
+      const {
         beer_name,
         min_IBU,
         max_IBU,
@@ -50,27 +53,8 @@ class AdvancedSearch extends Component {
         max_EBC,
         brewed_before,
         brewed_after,
-      };
-
-      this.props.advancedSearchActionCreator(parametersObj, history);
-    };
-
-    handleChange = ({ currentTarget: { name, value } }) => {
-      this.setState({ [name]: value });
-    };
-
-    render() {
-      const {
-        name,
-        min_IBU,
-        max_IBU,
-        min_ABV,
-        max_ABV,
-        min_EBC,
-        max_EBC,
-        brewed_before,
-        brewed_after,
       } = this.state;
+      const { history } = this.props;
 
       return (
         <div className="search-container">
@@ -81,8 +65,8 @@ class AdvancedSearch extends Component {
             <input
               type="search"
               id="name"
-              name="name"
-              value={name}
+              name="beer_name"
+              value={beer_name}
               onChange={this.handleChange}
             />
 
@@ -193,18 +177,7 @@ class AdvancedSearch extends Component {
           </div>
           <button
             className="search-btn"
-            onClick={() => this.handleAdvancedSearch(
-              name,
-              min_IBU,
-              max_IBU,
-              min_ABV,
-              max_ABV,
-              min_EBC,
-              max_EBC,
-              brewed_before,
-              brewed_after,
-              this.props.history,
-            )}
+            onClick={() => this.handleAdvancedSearch(history, this.state)}
           >
                     Search
           </button>

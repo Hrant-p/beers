@@ -71,27 +71,27 @@ class Home extends Component {
     window.onscroll = null;
   }
 
-    handleDetail = (id, history) => {
-      this.props.beerDetailActionCreator(parseInt(id), history);
-      this.props.getRandomBeerActionCreator();
-    };
+  handleDetail = (id, history) => {
+    this.props.beerDetailActionCreator(parseInt(id), history);
+    this.props.getRandomBeerActionCreator();
+  };
 
-    drawBeers = (beers) => beers.map((beer) => (
-      <Beer
-        beer={beer}
-        key={beer.get('id')}
-        loading={this.props.isLoading}
-        handleDetail={this.handleDetail}
-        handleFavourite={this.handleFavourite}
-        removeFromFavourite={this.removeFromFavourite}
-        clearFavourite={this.clearFavourite}
-        favouriteList={this.props.favouriteList}
-      />
-    ));
+  drawBeers = (beers) => beers.map((beer) => (
+    <Beer
+      beer={beer}
+      key={beer.get('id')}
+      loading={this.props.isLoading}
+      handleDetail={this.handleDetail}
+      handleFavourite={this.handleFavourite}
+      removeFromFavourite={this.removeFromFavourite}
+      clearFavourite={this.clearFavourite}
+      favouriteList={this.props.favouriteList}
+    />
+  ));
 
-    handlePagination = (perPage) => {
-      this.props.paginationActionCreator(perPage, 1);
-    };
+  handlePagination = (perPage) => {
+    this.props.paginationActionCreator(perPage, 1);
+  };
 
     infiniteScroll = () => {
       const {
@@ -169,7 +169,6 @@ class Home extends Component {
 
       return (
         <Fragment>
-          <>
             <div className="beerContainer">
               {showPagination && <Pagination pagination={this.handlePagination} />}
               {this.drawBeers(beerContent)}
@@ -189,7 +188,6 @@ class Home extends Component {
                             Beers Not Found
             </h2>
             )}
-          </>
           {isLoading && <Spinner />}
           {error && (
           <Error
