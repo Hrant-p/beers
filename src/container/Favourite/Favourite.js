@@ -1,6 +1,8 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import PropTypes from 'prop-types';
+import Immutable from 'immutable';
 import {
   addToFavouriteList,
   clearFavouriteList,
@@ -18,7 +20,6 @@ import Beer from '../../components/Beer/Beer';
 import {
   clearBeerDetails,
   getCertainBeerRequest,
-  getRandomBeerRequest,
 } from '../../store/actions/beerActionCreators';
 import Detail from '../../components/Detail/Detail';
 import Spinner from '../../components/Spinner/Spinner';
@@ -26,7 +27,7 @@ import Error from '../../components/Error/Error';
 
 class Favourite extends Component {
     handleDetail = (id, history) => {
-      this.props.beerDetailActionCreator(parseInt(id), history);
+      this.props.beerDetailActionCreator(Number(id), history);
     };
 
     handleFavourite = (id) => {
@@ -47,30 +48,21 @@ class Favourite extends Component {
     };
 
 
-    handleBeers = (favouriteList) => {
-      if (this.props.favouriteList.size < 1) {
-        return <p>You are not selected favourite beers</p>;
-      }
+    drawBeers = favouriteList => favouriteList.map((beer) => (
+      <Beer
+        key={beer.get('id')}
+        beer={beer}
+        loading={this.props.isLoading}
+        favouriteList={this.props.favouriteList}
+        handleDetail={this.handleDetail}
+        handleFavourite={this.handleFavourite}
+        clearFavourite={this.clearFavourite}
+        removeFromFavourite={this.removeFromFavourite}
+      />
+    ));
 
-      return favouriteList.map((beer) => (
-        <Beer
-          key={beer.get('id')}
-          beer={beer}
-          loading={this.props.isLoading}
-          favouriteList={this.props.favouriteList}
-          handleDetail={this.handleDetail}
-          handleFavourite={this.handleFavourite}
-          clearFavourite={this.clearFavourite}
-          removeFromFavourite={this.removeFromFavourite}
-        />
-      ));
-    };
-
-    drawDetails = (favouriteList) => {
-      const { details, error, isLoading } = this.props;
-      if (!details.size && error) {
-        return <Error />;
-      }
+    drawDetails = (details) => {
+      const { isLoading, favouriteList } = this.props;
       if (details.size) {
         return (
           <Detail
@@ -78,7 +70,7 @@ class Favourite extends Component {
             onClose={this.onClose}
             handleDetail={this.handleDetail}
             isLoading={isLoading}
-            favouriteList={this.props.favouriteList}
+            favouriteList={favouriteList}
             removeFromFavourite={this.removeFromFavourite}
             handleFavourite={this.handleFavourite}
           />
@@ -90,8 +82,8 @@ class Favourite extends Component {
       const {
         isLoading, details, favouriteList, error, searchResult,
       } = this.props;
-      let list = favouriteList; let
-        result = searchResult;
+      let list = favouriteList;
+      let result = searchResult;
       if (typeof searchResult.get(0) === 'string') {
         result = [];
       }
@@ -100,30 +92,43 @@ class Favourite extends Component {
       }
 
       return (
-        <>
-          <button
-            className="selectField"
-            onClick={this.clearFavourite}
-          >
-                    Remove All Favourites
-          </button>
-          {error && (
-          <Error
-            message={error.message}
-            stack={error.stack}
-          />
-          )}
-          <div className="beerContainer">
-            {this.handleBeers(list)}
+        <Fragment>
+          <div className="container">
+            <div className="card-header d-flex justify-content-between">
+              <h4 className="text-md">Favourites</h4>
+              <button
+                type="button"
+                className="btn btn-danger"
+                onClick={this.clearFavourite}
+              >
+              Remove All Favourites
+              </button>
+            </div>
+            {error && (
+            <Error
+              message={error.message}
+              stack={error.stack}
+            />
+            )}
+            <div className="card-body">
+              {!favouriteList.size && (
+              <h4 className="text-secondary text-center">
+                You are not selected favourite beers
+              </h4>
+              )}
+              {result.length === 0 && (
+                <p className="text-secondary text-center">
+                  No search result
+                </p>
+              )}
+              <div className="beerContainer">
+                {this.drawBeers(list)}
+              </div>
+            </div>
           </div>
-          {this.drawDetails(details)}
-          {result.length === 0 && (
-          <p>
-                        No search result
-          </p>
-          )}
           {isLoading && <Spinner />}
-        </>
+          {this.drawDetails(details)}
+        </Fragment>
       );
     }
 }
@@ -131,7 +136,7 @@ class Favourite extends Component {
 const mapStateToProps = (state) => ({
   isLoading: isLoadingSelector(state),
   details: detailsSelector(state),
-  errorSelector: errorSelector(state),
+  error: errorSelector(state),
   random: randomSelector(state),
   favouriteList: favouriteListSelector(state),
   beers: beersSelector(state),
@@ -141,11 +146,23 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => bindActionCreators({
   beerDetailActionCreator: getCertainBeerRequest,
   clearDetailActionCreator: clearBeerDetails,
-  getRandomBeerActionCreator: getRandomBeerRequest,
   addToFavoriteActionCreator: addToFavouriteList,
   clearFavoriteActionCreator: clearFavouriteList,
   removeFromFavouritesActionCreator: removeFromFavoriteList,
 },
 dispatch);
+
+Favourite.propTypes = {
+  beerDetailActionCreator: PropTypes.func.isRequired,
+  clearDetailActionCreator: PropTypes.func.isRequired,
+  addToFavoriteActionCreator: PropTypes.func.isRequired,
+  clearFavoriteActionCreator: PropTypes.func.isRequired,
+  removeFromFavouritesActionCreator: PropTypes.func.isRequired,
+  isLoading: PropTypes.bool.isRequired,
+  details: PropTypes.instanceOf(Immutable.List).isRequired,
+  favouriteList: PropTypes.instanceOf(Immutable.List).isRequired,
+  beers: PropTypes.instanceOf(Immutable.List).isRequired,
+  searchResult: PropTypes.instanceOf(Immutable.List).isRequired,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Favourite);

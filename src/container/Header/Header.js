@@ -54,19 +54,20 @@ const Header = ({
   return (
     <header className="header">
       <div className="info">
-        <h2>The Beer Bank</h2>
-        <p>Find your favourite beer here</p>
+        <h2 className="text-md-center">The Beer Bank</h2>
+        <p className="text-monospace">Find your favourite beer here</p>
         <input
           type="search"
           name="text"
           className="form-control-lg mb-2"
-          placeholder="search for beer name"
+          placeholder="Search for beer name"
           onChange={onChange}
+          maxLength="40"
           value={text}
         />
         <button
           type="button"
-          className="btn btn-primary"
+          className="btn btn-success"
           onClick={() => history.push('/advanced_search')}
         >
                         Advanced Search
