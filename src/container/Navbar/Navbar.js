@@ -8,7 +8,7 @@ import { clearSearchResults } from '../../store/actions/searchActionCreators';
 
 class Navbar extends Component {
     clearSearchResultHome = () => {
-      const {searchResult, clearSearchActionCreator, history} = this.props
+      const { searchResult, clearSearchActionCreator, history } = this.props;
       if (searchResult) {
         clearSearchActionCreator();
       }

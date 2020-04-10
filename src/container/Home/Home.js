@@ -2,6 +2,8 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
+import debounce from 'lodash.debounce';
+import { withRouter } from 'react-router';
 import {
   clearBeerDetails,
   getAllBeersRequest,
@@ -25,7 +27,6 @@ import Spinner from '../../components/Spinner/Spinner';
 
 import './Home.scss';
 import Detail from '../../components/Detail/Detail';
-import debounce from 'lodash.debounce';
 import { favouriteListSelector } from '../../store/selectors/favouriteSelector';
 import {
   addToFavouriteList,
@@ -33,7 +34,6 @@ import {
   removeFromFavoriteList,
 } from '../../store/actions/favoriteActionCreator';
 import Error from '../../components/Error/Error';
-import { withRouter } from 'react-router';
 
 class Home extends Component {
   constructor(props) {
@@ -132,7 +132,9 @@ class Home extends Component {
       const {
         random, error, isLoading, favouriteList,
       } = this.props;
-      if (!details.size && error) return <Error />;
+      if (!details.size && error) {
+        return <Error />;
+      }
       if (details.size) {
         return (
           <Detail
@@ -168,26 +170,18 @@ class Home extends Component {
       }
 
       return (
-        <Fragment>
-            <div className="beerContainer">
-              {showPagination && <Pagination pagination={this.handlePagination} />}
-              {this.drawBeers(beerContent)}
-            </div>
-            {this.drawDetails(details)}
-            {areOver && (
-            <h4
-              style={{ textAlign: 'center' }}
-            >
-                            Beers ended
-            </h4>
-            )}
-            {result.length === 0 && (
-            <h2
-              style={{ textAlign: 'center' }}
-            >
-                            Beers Not Found
-            </h2>
-            )}
+        <>
+          <div className="beerContainer">
+            {showPagination && <Pagination handlePagination={this.handlePagination} />}
+            {this.drawBeers(beerContent)}
+          </div>
+          {this.drawDetails(details)}
+          {areOver && (
+            <h4 className="text-center">Beers ended</h4>
+          )}
+          {result.length === 0 && (
+            <h2 className="text-center">Beers Not Found</h2>
+          )}
           {isLoading && <Spinner />}
           {error && (
           <Error
@@ -195,7 +189,7 @@ class Home extends Component {
             stack={error.stack}
           />
           )}
-        </Fragment>
+        </>
       );
     }
 }
@@ -228,7 +222,7 @@ const mapDispatchToProps = (dispatch) => bindActionCreators(
 );
 
 Home.propTypes = {
-  isLoading: PropTypes.bool,
+  isLoading: PropTypes.bool.isRequired,
 };
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Home));

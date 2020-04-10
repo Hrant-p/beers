@@ -3,6 +3,7 @@ import {
   Switch, BrowserRouter, Route, Redirect,
 } from 'react-router-dom';
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import Header from './container/Header/Header';
 import Home from './container/Home/Home';
 import Favourite from './container/Favourite/Favourite';

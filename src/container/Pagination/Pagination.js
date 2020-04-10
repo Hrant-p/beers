@@ -3,14 +3,14 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { perPageSelector } from '../../store/selectors/beerSelector';
 
-const Pagination = ({ pagination, perPage }) => {
+const Pagination = ({ handlePagination, perPage }) => {
   const handleChange = ({ target: { value } }) => {
-    pagination(Number(value), 1);
+    handlePagination(Number(value), 1);
   };
 
   return (
     <select
-      className="selectField"
+      className="custom-select-sm selectField"
       onChange={handleChange}
       value={perPage}
     >
@@ -26,7 +26,8 @@ const mapStateToProps = (state) => ({
 });
 
 Pagination.propTypes = {
-  perPage: PropTypes.number,
+  perPage: PropTypes.number.isRequired,
+  handlePagination: PropTypes.func.isRequired,
 };
 
-export default connect(mapStateToProps, {})(Pagination);
+export default connect(mapStateToProps, null)(Pagination);
