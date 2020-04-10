@@ -1,52 +1,59 @@
-import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
+import React from 'react';
+import { useHistory, withRouter } from 'react-router-dom';
 import './Navbar.scss';
 import { bindActionCreators } from 'redux';
+import PropTypes from 'prop-types';
+import Immutable from 'immutable';
 import { connect } from 'react-redux';
 import { searchSelector } from '../../store/selectors/beerSelector';
 import { clearSearchResults } from '../../store/actions/searchActionCreators';
 
-class Navbar extends Component {
-    clearSearchResultHome = () => {
-      const { searchResult, clearSearchActionCreator, history } = this.props;
-      if (searchResult) {
-        clearSearchActionCreator();
-      }
-      history.push('/beers');
-    };
-
-    clearSearchResultFavourite = () => {
-      if (this.props.searchResult) {
-        this.props.clearSearchActionCreator();
-      }
-      this.props.history.push('/favourite/');
-    };
-
-    render() {
-      return (
-        <nav>
-          <button
-            className="link"
-            onClick={this.clearSearchResultHome}
-          >
-                    Home
-          </button>
-          <button
-            className="link"
-            onClick={this.clearSearchResultFavourite}
-          >
-                    Favourite
-          </button>
-          <a
-            className="link"
-            href="/"
-          >
-            <i className="fas fa-retweet" />
-          </a>
-        </nav>
-      );
+const Navbar = ({ searchResult, clearSearchActionCreator }) => {
+  const history = useHistory();
+  const clearSearchResultHome = () => {
+    if (searchResult) {
+      clearSearchActionCreator();
     }
-}
+    history.push('/beers');
+  };
+
+  const clearSearchResultFavourite = () => {
+    if (searchResult) {
+      clearSearchActionCreator();
+    }
+    history.push('/favourite/');
+  };
+
+  return (
+    <nav>
+      <button
+        type="button"
+        className="link"
+        onClick={clearSearchResultHome}
+      >
+                    Home
+      </button>
+      <button
+        type="button"
+        className="link"
+        onClick={clearSearchResultFavourite}
+      >
+                    Favourite
+      </button>
+      <a
+        className="link"
+        href="/"
+      >
+        <i className="fas fa-retweet" />
+      </a>
+    </nav>
+  );
+};
+
+Navbar.propTypes = {
+  searchResult: PropTypes.instanceOf(Immutable.List).isRequired,
+  clearSearchActionCreator: PropTypes.func.isRequired
+};
 
 const mapStateToProps = (state) => ({
   searchResult: searchSelector(state),

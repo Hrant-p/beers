@@ -3,6 +3,8 @@ import './Header.scss';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { useHistory, useLocation, withRouter } from 'react-router';
+import Immutable from 'immutable';
+import PropTypes from 'prop-types';
 import {
   beersSelector, errorSelector, isLoadingSelector, searchSelector,
 } from '../../store/selectors/beerSelector';
@@ -85,5 +87,12 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => bindActionCreators({
   searchByNameActionCreator: searchByName,
 }, dispatch);
+
+Header.propTypes = {
+  searchByNameActionCreator: PropTypes.func.isRequired,
+  beers: PropTypes.instanceOf(Immutable.List).isRequired,
+  isLoading: PropTypes.bool.isRequired,
+  favouriteList: PropTypes.instanceOf(Immutable.List).isRequired,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Header));
