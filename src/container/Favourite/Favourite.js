@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import Immutable from 'immutable';
+import { withRouter } from 'react-router';
 import {
   addToFavouriteList,
   clearFavouriteList,
@@ -32,6 +33,12 @@ class Favourite extends Component {
       idList.forEach(id => {
         this.handleFavourite(id);
       });
+    }
+    const {
+      match: { params: { id } }, details, history, beerDetailActionCreator
+    } = this.props;
+    if (id && !details.size) {
+      idList.includes(Number(id)) ? beerDetailActionCreator(Number(id), history) : history.push('/favourite');
     }
   }
 
@@ -172,4 +179,4 @@ Favourite.propTypes = {
   searchResult: PropTypes.instanceOf(Immutable.List).isRequired,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Favourite);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Favourite));

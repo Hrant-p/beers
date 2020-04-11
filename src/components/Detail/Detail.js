@@ -3,18 +3,16 @@ import './Detail.scss';
 import { withRouter } from 'react-router';
 import Star from '../Star/Star';
 
-function Detail(props) {
-  const {
-    handleDetail,
-    details,
-    onClose,
-    randomBeers,
-    history,
-    favouriteList,
-    handleFavourite,
-    removeFromFavourite,
-  } = props;
-
+const Detail = ({
+  handleDetail,
+  details,
+  onClose,
+  randomBeers,
+  history,
+  favouriteList,
+  handleFavourite,
+  removeFromFavourite,
+}) => {
   const item = details.get(0);
   const randoms = !randomBeers ? null : randomBeers.map((beer) => (
     <div

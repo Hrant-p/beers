@@ -73,7 +73,7 @@ function* getRandomBeers() {
   } catch (e) {
     yield put(setLoadingState(false));
     yield put(requestError(e));
-    console.warn(e);
+    console.error(e);
   }
 }
 
