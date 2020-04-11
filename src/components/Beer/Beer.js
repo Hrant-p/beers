@@ -22,7 +22,8 @@ const Beer = ({
       {loading && <Spinner />}
       <div className="beer-image">
         <a
-          href="#"
+          href="#!"
+          target="#"
           className="icon"
           rel="noopener noreferer"
           onClick={e => {

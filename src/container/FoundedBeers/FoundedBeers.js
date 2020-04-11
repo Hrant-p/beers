@@ -19,7 +19,6 @@ import {
   removeFromFavoriteList,
 } from '../../store/actions/favoriteActionCreator';
 import Beer from '../../components/Beer/Beer';
-import Spinner from '../../components/Spinner/Spinner';
 
 class FoundedBeers extends Component {
     handleDetail = (id, history) => {
@@ -40,10 +39,6 @@ class FoundedBeers extends Component {
     };
 
     handleBeers = (list) =>
-    // if (this.props.searchResult.size < 1) {
-    //   return <p className="text-secondary text-center">No search result</p>;
-    // }
-
       list.map((beer) => (
         <Beer
           key={beer.get('id')}

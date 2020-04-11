@@ -108,37 +108,35 @@ class Favourite extends Component {
 
     return (
       <Fragment>
-        <div className="container">
-          <div className="card-header d-flex justify-content-between">
-            <h4 className="text-md">Favourites</h4>
-            <button
-              type="button"
-              className="btn btn-danger"
-              onClick={this.clearFavourite}
-            >
+        <div className="card-header d-flex justify-content-between">
+          <h4 className="text-md">Favourites</h4>
+          <button
+            type="button"
+            className="btn btn-danger"
+            onClick={this.clearFavourite}
+          >
               Remove All Favourites
-            </button>
-          </div>
-          {error && (
-            <Error
-              message={error.message}
-              stack={error.stack}
-            />
-          )}
-          <div className="card-body">
-            {!favouriteList.size && (
-              <h4 className="text-secondary text-center">
+          </button>
+        </div>
+        {error && (
+        <Error
+          message={error.message}
+          stack={error.stack}
+        />
+        )}
+        <div className="card-body">
+          {!favouriteList.size && (
+          <h4 className="text-secondary text-center">
                 You are not selected favourite beers
-              </h4>
-            )}
-            {result.length === 0 && (
+          </h4>
+          )}
+          {result.length === 0 && (
             <p className="text-secondary text-center">
                   No search result
             </p>
-            )}
-            <div className="beerContainer">
-              {this.drawBeers(list)}
-            </div>
+          )}
+          <div className="beerContainer">
+            {this.drawBeers(list)}
           </div>
         </div>
         {isLoading && <Spinner />}

@@ -2,7 +2,6 @@ import React, { Component, Fragment } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import Immutable from 'immutable';
 import { withRouter } from 'react-router';
 import { advancedSearchByParams } from '../../store/actions/searchActionCreators';
 import {
@@ -66,7 +65,7 @@ class AdvancedSearch extends Component {
             <h4 className="text-md text-center">Search Beers</h4>
           </div>
           {isLoading ? <Spinner /> : (
-            <div className="search-container">
+            <div className="search-container mb-5">
               <div className="search-field">
                 <label htmlFor="name">
                         Name

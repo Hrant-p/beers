@@ -46,7 +46,7 @@
     p {
       grid-area: descr;
     }
-    img{
+    img {
       &.star {
         position: absolute;
         grid-area: star;
@@ -79,7 +79,7 @@
       transition: 0.3s ease-in-out;
       cursor: pointer;
     }
-      i{
+      i {
         position: absolute;
         top: 5px;
         right: 5px;
@@ -90,6 +90,9 @@
     display: flex;
     grid-area: random;
     transition: ease-in-out 0.3s;
+    @media screen and (max-width: 750px) {
+      display: none;
+    }
     .random{
       display: grid;
       width: 100%;

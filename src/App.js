@@ -22,7 +22,7 @@ function App() {
         <Route path={['/favourite/', '/favourite/:id']} component={Favourite} exact />
         <Route path="/advanced_search" component={AdvancedSearch} exact />
         <Route path={['/founded_beers/', '/founded_beers/:id']} component={FoundedBeers} exact />
-        <Route render={() => <h2>Page Not Found...</h2>} />
+        <Route render={() => <h2 className="text-lg-center mt-4">Page Not Found...</h2>} />
       </Switch>
     </BrowserRouter>
   );
