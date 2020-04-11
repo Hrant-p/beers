@@ -167,7 +167,6 @@ Favourite.propTypes = {
   clearFavoriteActionCreator: PropTypes.func.isRequired,
   removeFromFavouritesActionCreator: PropTypes.func.isRequired,
   isLoading: PropTypes.bool.isRequired,
-  details: PropTypes.instanceOf(Immutable.List).isRequired,
   favouriteList: PropTypes.instanceOf(Immutable.List).isRequired,
   beers: PropTypes.instanceOf(Immutable.List).isRequired,
   searchResult: PropTypes.instanceOf(Immutable.List).isRequired,

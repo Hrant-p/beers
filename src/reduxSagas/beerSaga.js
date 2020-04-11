@@ -94,7 +94,7 @@ function* clearCertainBeer({ payload: { history } }) {
   } catch (e) {
     yield put(setLoadingState(false));
     yield put(requestError(e));
-    console.warn(e);
+    console.error(e);
   }
 }
 
@@ -162,7 +162,7 @@ function* searchByBeerName({ payload: { name, beers } }) {
     yield put(setLoadingState(false));
   } catch (e) {
     yield put(setLoadingState(false));
-    requestError(e);
+    yield put(requestError(e));
     console.log(e);
   }
 }
@@ -180,7 +180,7 @@ function* advancedSearch({ payload: { paramsObj, history } }) {
     yield put(setLoadingState(false));
   } catch (e) {
     yield put(setLoadingState(false));
-    requestError(e);
+    yield put(requestError(e));
     console.log(e);
   }
 }
@@ -193,7 +193,7 @@ function* clearSearchAndDetails() {
     yield put(setLoadingState(false));
   } catch (e) {
     yield put(setLoadingState(false));
-    requestError(e);
+    yield put(requestError(e));
     console.log(e);
   }
 }

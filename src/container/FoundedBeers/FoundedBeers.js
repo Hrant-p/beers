@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -19,6 +19,7 @@ import {
   removeFromFavoriteList,
 } from '../../store/actions/favoriteActionCreator';
 import Beer from '../../components/Beer/Beer';
+import Spinner from '../../components/Spinner/Spinner';
 
 class FoundedBeers extends Component {
     handleDetail = (id, history) => {
@@ -38,12 +39,12 @@ class FoundedBeers extends Component {
       this.props.clearDetailActionCreator(this.props.history);
     };
 
-    handleBeers = (list) => {
-      if (this.props.searchResult.size < 1) {
-        return <p>Not founded beers</p>;
-      }
+    handleBeers = (list) =>
+    // if (this.props.searchResult.size < 1) {
+    //   return <p className="text-secondary text-center">No search result</p>;
+    // }
 
-      return list.map((beer) => (
+      list.map((beer) => (
         <Beer
           key={beer.get('id')}
           beer={beer}
@@ -54,8 +55,8 @@ class FoundedBeers extends Component {
           clearFavourite={this.clearFavourite}
           removeFromFavourite={this.removeFromFavourite}
         />
-      ));
-    };
+      ))
+    ;
 
     drawDetails = (details) => {
       const { error, isLoading, favouriteList } = this.props;
@@ -77,14 +78,22 @@ class FoundedBeers extends Component {
     };
 
     render() {
+      const { searchResult, details, error } = this.props;
+
       return (
-        <div>
-                Founded Beers
-          <div className="beerContainer">
-            {this.handleBeers(this.props.searchResult)}
-            {this.drawDetails(this.props.details)}
+        <Fragment>
+          <div className="card-header">
+            <h4 className="text-md text-center">Founded Beers</h4>
           </div>
-        </div>
+          <div className="card-body">
+            {!searchResult.size && <p className="text-secondary text-center">No search result</p>}
+            <div className="beerContainer">
+              {this.handleBeers(searchResult)}
+            </div>
+          </div>
+          {this.drawDetails(details)}
+          {error && <Error />}
+        </Fragment>
       );
     }
 }
@@ -113,7 +122,6 @@ FoundedBeers.propTypes = {
   addToFavoriteActionCreator: PropTypes.func.isRequired,
   removeFromFavouritesActionCreator: PropTypes.func.isRequired,
   isLoading: PropTypes.bool.isRequired,
-  details: PropTypes.instanceOf(Immutable.Map).isRequired,
   favouriteList: PropTypes.instanceOf(Immutable.List).isRequired,
   beers: PropTypes.instanceOf(Immutable.List).isRequired,
   searchResult: PropTypes.instanceOf(Immutable.List).isRequired,

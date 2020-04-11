@@ -16,9 +16,6 @@ function Error({ message, stack }) {
       <h2>
         {message}
       </h2>
-      <span>
-        {stack}
-      </span>
     </section>
   );
 }

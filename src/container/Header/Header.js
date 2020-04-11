@@ -62,6 +62,10 @@ const Header = ({
           className="form-control-lg mb-2"
           placeholder="Search for beer name"
           onChange={onChange}
+          disabled={pathname.includes('founded_beers')
+          || pathname.includes('advanced_search')
+          || isLoading
+          || error}
           maxLength="40"
           value={text}
         />

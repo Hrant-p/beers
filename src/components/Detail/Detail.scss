@@ -25,6 +25,7 @@
     height: 80%;
     position: fixed;
     background: whitesmoke;
+    box-sizing: content-box;
     span {
       &:hover {
         cursor: pointer;

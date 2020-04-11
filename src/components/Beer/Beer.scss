@@ -1,8 +1,8 @@
-.beer{
+.beer {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 5px;
+  padding: 7.5px;
   transition: ease-in-out 0.2s;
   background-color: white;
   box-shadow: 0 0 10px -3px rgba(0,0,0,0.25);
@@ -34,12 +34,5 @@
     width: 20px;
     height: 20px;
     cursor: pointer;
-  }
-  p{
-    height: 50px;
-  }
-  h5{
-    height: 35px;
-    margin: 10px 10px 0 10px;
   }
 }
