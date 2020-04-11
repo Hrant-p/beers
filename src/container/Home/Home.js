@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import debounce from 'lodash.debounce';
 import { withRouter } from 'react-router';
+import Immutable from 'immutable';
 import {
   clearBeerDetails,
   getAllBeersRequest,
@@ -72,7 +73,7 @@ class Home extends Component {
   }
 
   handleDetail = (id, history) => {
-    this.props.beerDetailActionCreator(parseInt(id), history);
+    this.props.beerDetailActionCreator(Number(id), history);
     this.props.getRandomBeerActionCreator();
   };
 
@@ -222,6 +223,18 @@ const mapDispatchToProps = (dispatch) => bindActionCreators(
 );
 
 Home.propTypes = {
+  getAllBeersActionCreator: PropTypes.func.isRequired,
+  paginationActionCreator: PropTypes.func.isRequired,
+  infinitePaginationActionCreator: PropTypes.func.isRequired,
+  beerDetailActionCreator: PropTypes.func.isRequired,
+  clearDetailActionCreator: PropTypes.func.isRequired,
+  getRandomBeerActionCreator: PropTypes.func.isRequired,
+  addToFavoriteActionCreator: PropTypes.func.isRequired,
+  clearFavoriteActionCreator: PropTypes.func.isRequired,
+  removeFromFavouritesActionCreator: PropTypes.func.isRequired,
+  beers: PropTypes.instanceOf(Immutable.List).isRequired,
+  page: PropTypes.number.isRequired,
+  perPage: PropTypes.number.isRequired,
   isLoading: PropTypes.bool.isRequired,
 };
 

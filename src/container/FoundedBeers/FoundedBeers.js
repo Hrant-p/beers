@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import Immutable from 'immutable';
 import Error from '../../components/Error/Error';
 import Detail from '../../components/Detail/Detail';
 import {
@@ -20,7 +22,7 @@ import Beer from '../../components/Beer/Beer';
 
 class FoundedBeers extends Component {
     handleDetail = (id, history) => {
-      this.props.beerDetailActionCreator(parseInt(id), history);
+      this.props.beerDetailActionCreator(Number(id), history);
     };
 
     handleFavourite = (id) => {
@@ -104,5 +106,17 @@ const mapDispatchToProps = (dispatch) => bindActionCreators({
   removeFromFavouritesActionCreator: removeFromFavoriteList,
 },
 dispatch);
+
+FoundedBeers.propTypes = {
+  beerDetailActionCreator: PropTypes.func.isRequired,
+  clearDetailActionCreator: PropTypes.func.isRequired,
+  addToFavoriteActionCreator: PropTypes.func.isRequired,
+  removeFromFavouritesActionCreator: PropTypes.func.isRequired,
+  isLoading: PropTypes.bool.isRequired,
+  details: PropTypes.instanceOf(Immutable.Map).isRequired,
+  favouriteList: PropTypes.instanceOf(Immutable.List).isRequired,
+  beers: PropTypes.instanceOf(Immutable.List).isRequired,
+  searchResult: PropTypes.instanceOf(Immutable.List).isRequired,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(FoundedBeers);

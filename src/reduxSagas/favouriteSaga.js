@@ -37,7 +37,6 @@ function* addToFavourite({ payload: { beersList, favouriteList, id } }) {
     const arr = yield beersList.filter((item) => item.get('id') === id);
     const { size } = favouriteList.filter((fav) => fav.get('id') === id);
     if (arr.size > 0 && size < 1) {
-      console.log('arr.size > 0 && size < 1');
       yield put(addedToFavouriteListSucceed(arr));
     } else if (arr.size < 1 && size < 1) {
       const { data } = yield call(
@@ -45,7 +44,6 @@ function* addToFavourite({ payload: { beersList, favouriteList, id } }) {
         'GET',
         constructUrl([beerAPI, id], {}),
       );
-      console.log('data', data);
       yield put(addedToFavouriteListSucceed(data));
     }
     yield setItemLocalStorage(id, true);
