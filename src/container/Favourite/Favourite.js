@@ -26,111 +26,119 @@ import Spinner from '../../components/Spinner/Spinner';
 import Error from '../../components/Error/Error';
 
 class Favourite extends Component {
-    handleDetail = (id, history) => {
-      this.props.beerDetailActionCreator(Number(id), history);
-    };
+  componentDidMount() {
+    const idList = JSON.parse(localStorage.getItem('favourites'));
+    if (idList && idList.length) {
+      idList.forEach(id => {
+        this.handleFavourite(id);
+      });
+    }
+  }
 
-    handleFavourite = (id) => {
-      const { addToFavoriteActionCreator, beers, favouriteList } = this.props;
-      addToFavoriteActionCreator(beers, favouriteList, id);
-    };
+  handleFavourite = (id) => {
+    const { addToFavoriteActionCreator, beers, favouriteList } = this.props;
+    addToFavoriteActionCreator(beers, favouriteList, id);
+  };
 
-    clearFavourite = () => {
-      this.props.clearFavoriteActionCreator();
-    };
+  clearFavourite = () => {
+    this.props.clearFavoriteActionCreator();
+  };
 
-    removeFromFavourite = (removeId) => {
-      this.props.removeFromFavouritesActionCreator(this.props.favouriteList, removeId);
-    };
+  removeFromFavourite = removeId => {
+    this.props.removeFromFavouritesActionCreator(this.props.favouriteList, removeId);
+  };
 
-    onClose = () => {
-      this.props.clearDetailActionCreator(this.props.history);
-    };
+  onClose = () => {
+    this.props.clearDetailActionCreator(this.props.history);
+  };
 
+  handleDetail = (id, history) => {
+    this.props.beerDetailActionCreator(Number(id), history);
+  };
 
-    drawBeers = favouriteList => favouriteList.map((beer) => (
-      <Beer
-        key={beer.get('id')}
-        beer={beer}
-        loading={this.props.isLoading}
-        favouriteList={this.props.favouriteList}
-        handleDetail={this.handleDetail}
-        handleFavourite={this.handleFavourite}
-        clearFavourite={this.clearFavourite}
-        removeFromFavourite={this.removeFromFavourite}
-      />
-    ));
+  drawBeers = favouriteList => favouriteList.map((beer) => (
+    <Beer
+      key={beer.get('id')}
+      beer={beer}
+      loading={this.props.isLoading}
+      favouriteList={this.props.favouriteList}
+      handleDetail={this.handleDetail}
+      handleFavourite={this.handleFavourite}
+      clearFavourite={this.clearFavourite}
+      removeFromFavourite={this.removeFromFavourite}
+    />
+  ));
 
-    drawDetails = (details) => {
-      const { isLoading, favouriteList } = this.props;
-      if (details.size) {
-        return (
-          <Detail
-            details={details}
-            onClose={this.onClose}
-            handleDetail={this.handleDetail}
-            isLoading={isLoading}
-            favouriteList={favouriteList}
-            removeFromFavourite={this.removeFromFavourite}
-            handleFavourite={this.handleFavourite}
-          />
-        );
-      }
-    };
-
-    render() {
-      const {
-        isLoading, details, favouriteList, error, searchResult,
-      } = this.props;
-      let list = favouriteList;
-      let result = searchResult;
-      if (typeof searchResult.get(0) === 'string') {
-        result = [];
-      }
-      if (result.length === 0 || searchResult.size > 0) {
-        list = result;
-      }
-
+  drawDetails = (details) => {
+    const { isLoading, favouriteList } = this.props;
+    if (details.size) {
       return (
-        <Fragment>
-          <div className="container">
-            <div className="card-header d-flex justify-content-between">
-              <h4 className="text-md">Favourites</h4>
-              <button
-                type="button"
-                className="btn btn-danger"
-                onClick={this.clearFavourite}
-              >
+        <Detail
+          details={details}
+          onClose={this.onClose}
+          handleDetail={this.handleDetail}
+          isLoading={isLoading}
+          favouriteList={favouriteList}
+          removeFromFavourite={this.removeFromFavourite}
+          handleFavourite={this.handleFavourite}
+        />
+      );
+    }
+  };
+
+  render() {
+    const {
+      isLoading, details, favouriteList, error, searchResult,
+    } = this.props;
+    let list = favouriteList;
+    let result = searchResult;
+    if (typeof searchResult.get(0) === 'string') {
+      result = [];
+    }
+    if (result.length === 0 || searchResult.size > 0) {
+      list = result;
+    }
+
+    return (
+      <Fragment>
+        <div className="container">
+          <div className="card-header d-flex justify-content-between">
+            <h4 className="text-md">Favourites</h4>
+            <button
+              type="button"
+              className="btn btn-danger"
+              onClick={this.clearFavourite}
+            >
               Remove All Favourites
-              </button>
-            </div>
-            {error && (
+            </button>
+          </div>
+          {error && (
             <Error
               message={error.message}
               stack={error.stack}
             />
-            )}
-            <div className="card-body">
-              {!favouriteList.size && (
+          )}
+          <div className="card-body">
+            {!favouriteList.size && (
               <h4 className="text-secondary text-center">
                 You are not selected favourite beers
               </h4>
-              )}
-              {result.length === 0 && (
-                <p className="text-secondary text-center">
+            )}
+            {result.length === 0 && (
+            <p className="text-secondary text-center">
                   No search result
-                </p>
-              )}
-              <div className="beerContainer">
-                {this.drawBeers(list)}
-              </div>
+            </p>
+            )}
+            <div className="beerContainer">
+              {this.drawBeers(list)}
             </div>
           </div>
-          {isLoading && <Spinner />}
-          {this.drawDetails(details)}
-        </Fragment>
-      );
-    }
+        </div>
+        {isLoading && <Spinner />}
+        {this.drawDetails(details)}
+      </Fragment>
+    );
+  }
 }
 
 const mapStateToProps = (state) => ({
