@@ -1,0 +1,15 @@
+{
+  "presets": [[
+    "@babel/env",
+    {
+      "debug": true,
+      "corejs": 3,
+      "useBuiltIns": "usage"
+    }],
+    "@babel/react"
+  ],
+  "plugins": [
+    "@babel/proposal-class-properties",
+    "@babel/plugin-transform-regenerator"
+  ]
+}

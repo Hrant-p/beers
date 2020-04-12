@@ -48,7 +48,7 @@ class Home extends Component {
       isLoading,
       getAllBeersActionCreator,
       details,
-      match,
+      match: { params: { id } },
       history,
     } = this.props;
 
@@ -56,14 +56,12 @@ class Home extends Component {
       getAllBeersActionCreator();
     }
 
-    if (match.params.id && typeof match.params.id !== 'number') {
+    if (id && !Number(id)) {
       history.push('/');
     }
-    if (match.params.id
-            && typeof match.params.id === 'number'
-            && details.size === 0
-            && !isLoading) {
-      this.handleDetail(match.params.id, history);
+
+    if (id && Number(id) && !details.size) {
+      this.handleDetail(Number(id), history);
     }
     window.onscroll = debounce(this.infiniteScroll, 300);
   }
@@ -77,7 +75,7 @@ class Home extends Component {
     this.props.getRandomBeerActionCreator();
   };
 
-  drawBeers = (beers) => beers.map((beer) => (
+  drawBeers = beers => beers.map((beer) => (
     <Beer
       beer={beer}
       key={beer.get('id')}
